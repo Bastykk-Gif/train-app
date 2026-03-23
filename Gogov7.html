@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#0A0A0A">
+<title>TRAIN</title>
+<style>
+@font-face{font-family:'DF';src:local('Impact'),local('Haettenschweiler'),local('Arial Narrow Bold');font-weight:700}
+:root{
+  --red:#E8001A;--rdim:rgba(232,0,26,0.13);
+  --w:#F5F3EF;--bk:#0A0A0A;--dk:#111;
+  --cd:#181818;--cd2:#212121;--br:rgba(255,255,255,0.08);
+  --mt:#666;--mt2:#999;--rad:14px;
+  --fd:'Impact','Arial Narrow',Arial,sans-serif;
+  --fc:'Arial Narrow',Arial,sans-serif;
+  --fb:Arial,sans-serif;
+  --nh:60px;--sb:env(safe-area-inset-bottom,0px);
+}
+.hero-title,.seance-title,.recap-title,.hist-title{letter-spacing:-.5px}
+.hero-title{font-size:34px!important}
+.seance-title{font-size:26px!important}
+.recap-title{font-size:36px!important}
+.hist-title{font-size:30px!important}
+.summary-val{font-size:20px!important}
+.prog-pct{font-size:18px!important}
+.kcal-big{font-size:52px!important}
+.recap-stat-val{font-size:22px!important}
+.hwt-val{font-size:26px!important}
+.hist-kcal{font-size:18px!important}
+.tcd{font-size:34px!important}
+.btn-finish,.btn-home{font-size:15px!important}
+
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{height:100%;background:var(--bk)}
+body{min-height:100%;background:var(--bk);color:var(--w);font-family:var(--fb);font-size:15px;line-height:1.4;-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent;touch-action:pan-y;overscroll-behavior-y:none}
+#app{max-width:480px;margin:0 auto;min-height:100vh;background:var(--bk)}
+.screen{display:none;padding-bottom:calc(var(--nh) + var(--sb) + 20px)}
+.screen.active{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@keyframes chkPop{0%{transform:scale(.4)}60%{transform:scale(1.3)}100%{transform:scale(1)}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+@keyframes fall{0%{transform:translateY(0) rotate(0deg);opacity:1}100%{transform:translateY(-90px) rotate(720deg);opacity:0}}
+@keyframes coachIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
+@keyframes countPop{0%{transform:scale(.5);opacity:0}50%{transform:scale(1.4)}100%{transform:scale(1);opacity:1}}
+
+/* ── NAV ── */
+.bnav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;height:calc(var(--nh) + var(--sb));background:var(--dk);border-top:1px solid var(--br);display:flex;z-index:200;padding-bottom:var(--sb)}
+.nb{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;border:none;background:none;color:var(--mt);font-family:var(--fc);font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;min-height:44px;transition:color .15s;-webkit-tap-highlight-color:transparent}
+.nb.on{color:var(--red)}
+.ni{font-size:22px;line-height:1}
+
+/* ── HOME ── */
+.hh{background:var(--dk);padding:52px 20px 28px;position:relative;overflow:hidden}
+.hh::before{content:'TRAIN';position:absolute;right:-8px;bottom:-18px;font-family:var(--fd);font-size:120px;color:rgba(255,255,255,.03);line-height:1;pointer-events:none}
+.ht{font-family:var(--fc);font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--red);margin-bottom:8px}
+.hero-title{font-family:var(--fd);font-size:46px;line-height:.95;color:var(--w)}
+.hs{font-size:13px;color:var(--mt2);margin-top:10px}
+.wsum{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:16px 20px 0}
+.ss{background:var(--cd);border-radius:10px;padding:13px 10px;border:1px solid var(--br)}
+.sl{font-family:var(--fc);font-size:10px;font-weight:600;color:var(--mt);letter-spacing:.1em;text-transform:uppercase}
+.summary-val{font-family:var(--fd);color:var(--w);margin-top:4px;line-height:1}
+.summary-val.red{color:var(--red)}
+.su{font-size:10px;color:var(--mt);margin-top:2px}
+.sl2{font-family:var(--fc);font-size:11px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--mt);padding:20px 20px 10px}
+.dl{padding:0 20px;display:flex;flex-direction:column;gap:10px}
+.dc{background:var(--cd);border-radius:var(--rad);border:1px solid var(--br);display:flex;align-items:stretch;overflow:hidden;cursor:pointer;transition:border-color .2s;min-height:44px;-webkit-tap-highlight-color:transparent}
+.dc.rest{opacity:.4;pointer-events:none}
+.dc.done{border-color:rgba(232,0,26,.35)}
+.dca{width:4px;flex-shrink:0;background:var(--br);transition:background .2s}
+.dc.done .dca,.dc:active .dca{background:var(--red)}
+.dcb{flex:1;padding:14px 16px}
+.dcn{font-family:var(--fc);font-size:18px;font-weight:700;letter-spacing:.04em}
+.ddb{font-family:var(--fc);font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;background:var(--rdim);color:var(--red);padding:3px 8px;border-radius:5px}
+.dct{font-size:12px;color:var(--mt2);margin-top:3px}
+.dctg{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+.tg{font-family:var(--fc);font-size:11px;font-weight:600;background:var(--cd2);color:var(--mt2);padding:4px 9px;border-radius:5px}
+.tg.r{color:var(--red);background:var(--rdim)}
+.nb2{display:flex;align-items:center;gap:12px;background:var(--cd);border-radius:var(--rad);border:1px solid var(--br);padding:16px;cursor:pointer;margin:12px 20px 0;min-height:56px;-webkit-tap-highlight-color:transparent}
+.ni2{font-size:20px}
+.nt{flex:1}
+.ntl{font-family:var(--fc);font-size:15px;font-weight:600}
+.nts{font-size:12px;color:var(--mt);margin-top:2px}
+.ntg{width:46px;height:28px;background:var(--cd2);border-radius:14px;position:relative;transition:background .2s;flex-shrink:0}
+.ntg.on{background:var(--red)}
+.nth{position:absolute;width:22px;height:22px;background:white;border-radius:50%;top:3px;left:3px;transition:transform .2s;box-shadow:0 1px 4px rgba(0,0,0,.4)}
+.ntg.on .nth{transform:translateX(18px)}
+
+/* ── SÉANCE ── */
+.stop{background:var(--dk);padding:52px 20px 0;position:relative}
+.stop::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:var(--br)}
+.bbtn{display:flex;align-items:center;gap:8px;background:none;border:none;color:var(--mt);font-family:var(--fc);font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;margin-bottom:18px;padding:8px 0;min-height:44px;-webkit-tap-highlight-color:transparent}
+.sdt{font-family:var(--fc);font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--red);margin-bottom:6px}
+.seance-title{font-family:var(--fd);line-height:.95;color:var(--w);margin-bottom:14px}
+.sbg{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap}
+.sb{font-family:var(--fc);font-size:12px;font-weight:600;background:var(--cd);border:1px solid var(--br);padding:5px 12px;border-radius:6px;color:var(--mt2)}
+.sb.r{color:var(--red);background:var(--rdim);border-color:transparent}
+.pw{padding:14px 20px}
+.pr{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.pl{font-family:var(--fc);font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--mt)}
+.prog-pct{font-family:var(--fd);color:var(--red)}
+.pt{background:var(--cd2);border-radius:3px;height:5px;overflow:hidden}
+.pf{height:100%;background:var(--red);border-radius:3px;transition:width .45s cubic-bezier(.4,0,.2,1)}
+.sc2{padding:0 20px}
+.bh{font-family:var(--fc);font-size:11px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--mt);padding:18px 0 10px;border-top:1px solid var(--br);margin-top:6px}
+.bh:first-child{border-top:none;margin-top:0;padding-top:6px}
+
+/* COACH VOCAL */
+.coach{
+  background:var(--dk);border:2px solid var(--red);border-radius:var(--rad);
+  padding:14px 16px;margin-bottom:10px;display:none;
+  flex-direction:column;gap:8px;animation:coachIn .2s ease;
+}
+.coach.on{display:flex}
+.coach-top{display:flex;align-items:center;gap:12px}
+.coach-icon{font-size:24px;flex-shrink:0}
+.coach-info{flex:1}
+.coach-label{font-family:var(--fc);font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--red)}
+.tcd{font-family:var(--fd);color:var(--w);line-height:1;margin-top:2px}
+.tcd.urg{color:var(--red);animation:blink .5s ease infinite}
+.tbar{background:var(--cd2);border-radius:2px;height:3px;overflow:hidden}
+.tbf{height:100%;background:var(--red);border-radius:2px;transition:width 1s linear}
+.coach-skip{background:var(--cd2);border:1px solid var(--br);border-radius:8px;padding:10px 14px;font-family:var(--fc);font-size:12px;font-weight:600;color:var(--mt2);cursor:pointer;flex-shrink:0;min-width:44px;min-height:44px;display:flex;align-items:center;justify-content:center;-webkit-tap-highlight-color:transparent}
+
+/* COUNTDOWN OVERLAY */
+.cto{
+  position:fixed;inset:0;background:rgba(10,10,10,.92);
+  display:none;flex-direction:column;align-items:center;justify-content:center;
+  z-index:500;
+}
+.cto.on{display:flex}
+.cto-label{font-family:var(--fc);font-size:14px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--mt);margin-bottom:16px}
+.cto-num{font-family:var(--fd);font-size:120px;color:var(--red);line-height:1;animation:countPop .4s ease}
+.cto-go{font-family:var(--fd);font-size:72px;color:#4ade80;line-height:1;animation:countPop .3s ease}
+
+/* EXERCISE CARD */
+.ec{background:var(--cd);border-radius:var(--rad);border:1px solid var(--br);margin-bottom:8px;overflow:hidden;transition:border-color .25s}
+.ec.dk2{border-color:rgba(232,0,26,.3);background:rgba(232,0,26,.03)}
+.em{display:flex;align-items:center;gap:12px;padding:14px;cursor:pointer;min-height:56px;-webkit-tap-highlight-color:transparent}
+.eck{width:36px;height:36px;min-width:36px;min-height:36px;border-radius:50%;flex-shrink:0;border:2px solid var(--mt);display:flex;align-items:center;justify-content:center;cursor:pointer;background:none;font-family:var(--fc);font-size:13px;font-weight:700;color:var(--mt2);transition:background .2s,border-color .2s;-webkit-tap-highlight-color:transparent}
+.eck.on{background:var(--red);border-color:var(--red);color:white;font-size:16px;animation:chkPop .25s ease}
+.ei{flex:1;min-width:0}
+.en{font-family:var(--fc);font-size:16px;font-weight:600;letter-spacing:.03em}
+.ec.dk2 .en{color:var(--mt);text-decoration:line-through}
+.ed{font-size:12px;color:var(--mt);margin-top:3px;line-height:1.3}
+.ea{color:var(--mt);font-size:20px;flex-shrink:0;transition:transform .2s}
+.ec.exp .ea{transform:rotate(90deg)}
+.eex{display:none;padding:0 14px 14px}
+.ec.exp .eex{display:block;animation:fadeUp .2s ease}
+.vp{margin-bottom:12px;border-radius:10px;overflow:hidden;background:var(--cd2);position:relative}
+.vp video{width:100%;display:block;height:170px;object-fit:cover;background:var(--cd2)}
+.vc{position:absolute;bottom:6px;right:8px;font-family:var(--fc);font-size:9px;font-weight:600;letter-spacing:.1em;color:rgba(255,255,255,.4);text-transform:uppercase}
+.mtags{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:10px}
+.mt3{font-family:var(--fc);font-size:11px;font-weight:600;padding:3px 8px;border-radius:5px}
+.mt3.p{background:var(--rdim);color:var(--red)}
+.mt3.s{background:var(--cd2);color:var(--mt2)}
+.egrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(68px,1fr));gap:8px;margin-bottom:10px}
+.ebox{background:var(--cd2);border-radius:10px;padding:10px 8px;text-align:center}
+.ebl{font-family:var(--fc);font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--mt)}
+.ebv{font-family:var(--fd);font-size:18px;color:var(--w);margin-top:3px;line-height:1}
+.enote{font-size:12px;color:var(--mt2);font-style:italic;margin-top:6px;line-height:1.4}
+
+/* ELLIPTIQUE STEPS */
+.esteps{background:var(--cd2);border-radius:10px;padding:10px;margin-bottom:10px}
+.esteps-title{font-family:var(--fc);font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--mt);margin-bottom:8px}
+.estep{display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px solid var(--br)}
+.estep:last-child{border-bottom:none}
+.estep-min{font-family:var(--fc);font-size:11px;color:var(--mt);width:40px;flex-shrink:0}
+.estep-bar{flex:1;height:6px;background:var(--cd);border-radius:3px;overflow:hidden}
+.estep-fill{height:100%;border-radius:3px;background:var(--red)}
+.estep-f{font-family:var(--fd);font-size:14px;color:var(--red);width:28px;text-align:right;flex-shrink:0}
+
+/* CARDIO */
+.cc{background:var(--cd);border-radius:var(--rad);border:1px solid var(--br);margin-bottom:8px;overflow:hidden;transition:border-color .25s}
+.cc.dk2{border-color:rgba(232,0,26,.3);background:rgba(232,0,26,.03)}
+.cm{display:flex;justify-content:space-between;align-items:center;padding:14px;min-height:52px}
+.cn{font-family:var(--fc);font-size:16px;font-weight:600;letter-spacing:.03em;flex:1}
+.cc.dk2 .cn{color:var(--mt);text-decoration:line-through}
+.cp{font-size:12px;color:var(--mt);padding:0 14px 12px;line-height:1.5}
+.cck{width:36px;height:36px;min-width:36px;min-height:36px;border-radius:50%;flex-shrink:0;border:2px solid var(--mt);display:flex;align-items:center;justify-content:center;cursor:pointer;background:none;color:transparent;font-size:16px;font-weight:700;transition:background .2s,border-color .2s;-webkit-tap-highlight-color:transparent}
+.cck.on{background:var(--red);border-color:var(--red);color:white;animation:chkPop .25s ease}
+.ht2{width:100%;border-collapse:collapse;margin:0 0 12px;font-size:13px}
+.ht2 td{padding:8px 14px;border-bottom:1px solid var(--br)}
+.ht2 td:first-child{font-family:var(--fc);font-weight:600;color:var(--mt2)}
+.ht2 tr:last-child td{border-bottom:none}
+.he{color:var(--red)!important}
+.fw{padding:18px 20px 0}
+.btn-finish{width:100%;background:var(--red);color:white;border:none;border-radius:var(--rad);padding:18px;font-family:var(--fd);letter-spacing:1px;cursor:pointer;min-height:56px;-webkit-tap-highlight-color:transparent;transition:opacity .15s}
+.btn-finish:disabled{opacity:.25}
+.btn-finish:not(:disabled):active{opacity:.8}
+
+/* RECAP */
+.rh{background:var(--red);padding:56px 20px 32px;position:relative;overflow:hidden}
+.rh::before{content:'GG';position:absolute;right:-8px;top:-18px;font-family:var(--fd);font-size:150px;color:rgba(0,0,0,.15);pointer-events:none;line-height:1}
+.recap-title{font-family:var(--fd);color:white;line-height:.95}
+.rsub{font-size:14px;color:rgba(255,255,255,.75);margin-top:8px}
+.rkw{padding:24px 20px 0}
+.rkc{background:var(--cd);border-radius:var(--rad);border:1px solid var(--br);padding:22px;display:flex;align-items:flex-end;gap:8px;justify-content:space-between}
+.kcal-big{font-family:var(--fd);color:var(--red);line-height:1}
+.ku{font-family:var(--fc);font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--mt)}
+.kd{font-size:12px;color:var(--mt2);margin-top:4px}
+.rg{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:10px 20px 0}
+.rs{background:var(--cd);border-radius:12px;padding:14px;border:1px solid var(--br)}
+.rsl{font-family:var(--fc);font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--mt)}
+.recap-stat-val{font-family:var(--fd);color:var(--w);margin-top:5px;line-height:1}
+.rss{font-size:11px;color:var(--mt);margin-top:2px}
+.wkc{margin:10px 20px 0;background:var(--cd);border-radius:var(--rad);border:1px solid var(--br);padding:16px}
+.wkl{font-family:var(--fc);font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--mt);margin-bottom:12px}
+.wkb{display:flex;gap:4px;align-items:flex-end;height:50px}
+.wb{flex:1;border-radius:3px 3px 0 0;background:var(--cd2);min-height:4px;transition:background .3s}
+.wb.td{background:var(--red)}
+.wb.dn{background:rgba(232,0,26,.4)}
+.wdl{display:flex;gap:4px;margin-top:5px}
+.wdl2{flex:1;text-align:center;font-family:var(--fc);font-size:9px;font-weight:600;color:var(--mt);letter-spacing:.06em;text-transform:uppercase}
+.btn-home{display:block;margin:12px 20px 0;background:var(--cd);color:var(--w);border:1px solid var(--br);border-radius:var(--rad);padding:16px;width:calc(100% - 40px);font-family:var(--fd);letter-spacing:.5px;cursor:pointer;text-align:center;min-height:52px;-webkit-tap-highlight-color:transparent}
+
+/* HISTORIQUE */
+.hih{background:var(--dk);padding:52px 20px 22px}
+.hist-title{font-family:var(--fd);letter-spacing:.5px}
+.hisub{font-size:13px;color:var(--mt2);margin-top:6px}
+.hwt{background:var(--red);border-radius:var(--rad);margin:14px 20px 0;padding:16px;display:flex;justify-content:space-between;align-items:center}
+.hwt-label{font-family:var(--fc);font-size:11px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.7)}
+.hwt-val{font-family:var(--fd);color:white;line-height:1}
+.hwu{font-size:12px;color:rgba(255,255,255,.6);margin-top:2px}
+.hil{padding:0 20px;margin-top:14px;display:flex;flex-direction:column;gap:8px}
+.hie{background:var(--cd);border-radius:12px;border:1px solid var(--br);padding:14px 16px;display:flex;align-items:center;gap:14px}
+.hid{width:10px;height:10px;border-radius:50%;background:var(--red);flex-shrink:0}
+.hii{flex:1;min-width:0}
+.hiday{font-family:var(--fc);font-size:15px;font-weight:600;letter-spacing:.04em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hidate{font-size:11px;color:var(--mt);margin-top:2px}
+.hist-kcal{font-family:var(--fd);color:var(--red);flex-shrink:0}
+.hiemp{padding:40px 20px;text-align:center}
+.hiempi{font-size:40px;margin-bottom:12px}
+.hiempt{font-size:14px;color:var(--mt);line-height:1.5}
+.hicl{margin:14px 20px 0;background:none;border:1px solid var(--br);border-radius:var(--rad);padding:14px;width:calc(100% - 40px);font-family:var(--fc);font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--mt);cursor:pointer;min-height:48px;-webkit-tap-highlight-color:transparent}
+.cfp{position:fixed;width:8px;height:8px;border-radius:2px;pointer-events:none;z-index:999;animation:fall 1.2s ease-out forwards}
+</style>
+</head>
+<body>
+<div id="app">
+
+<div id="home" class="screen active">
+  <div class="hh">
+    <div class="ht">Programme · Mois 1</div>
+    <div class="hero-title">PRÊT À<br>SUER ?</div>
+    <div class="hs">5 séances · ~2 050 kcal / semaine</div>
+  </div>
+  <div class="wsum">
+    <div class="ss"><div class="sl">Séances</div><div class="summary-val red" id="statDone">0</div><div class="su">cette semaine</div></div>
+    <div class="ss"><div class="sl">Calories</div><div class="summary-val red" id="statKcal">0</div><div class="su">kcal brûlées</div></div>
+    <div class="ss"><div class="sl">Objectif</div><div class="summary-val">2050</div><div class="su">kcal / sem.</div></div>
+  </div>
+  <div class="sl2">Cette semaine</div>
+  <div class="dl" id="dayList"></div>
+  <div class="nb2" id="notifBtn">
+    <div class="ni2">🔔</div>
+    <div class="nt"><div class="ntl">Rappels d'entraînement</div><div class="nts" id="notifSub">Désactivé</div></div>
+    <div class="ntg" id="notifToggle"><div class="nth"></div></div>
+  </div>
+</div>
+
+<div id="seance" class="screen">
+  <div class="stop">
+    <button class="bbtn" id="backBtn">← Retour</button>
+    <div class="sdt" id="sDayTag"></div>
+    <div class="seance-title" id="sTitle"></div>
+    <div class="sbg"><span class="sb" id="sDuree"></span><span class="sb r" id="sKcal"></span></div>
+  </div>
+  <div class="pw">
+    <div class="pr"><span class="pl">Progression</span><span class="prog-pct" id="progPct">0%</span></div>
+    <div class="pt"><div class="pf" id="progFill" style="width:0%"></div></div>
+  </div>
+  <div class="sc2" id="seanceContent"></div>
+  <div class="fw"><button class="btn-finish" id="btnFinish" disabled>TERMINER LA SÉANCE</button></div>
+</div>
+
+<div id="recap" class="screen">
+  <div class="rh"><div class="recap-title">SÉANCE<br>TERMINÉE</div><div class="rsub" id="recapSub"></div></div>
+  <div class="rkw"><div class="rkc"><div class="kcal-big" id="recapKcal">—</div><div><div class="ku">kcal</div><div class="kd">brûlées aujourd'hui</div></div></div></div>
+  <div class="rg" id="recapGrid"></div>
+  <div class="wkc">
+    <div class="wkl">Calories semaine</div>
+    <div class="wkb" id="weekBars"></div>
+    <div class="wdl"><div class="wdl2">Lun</div><div class="wdl2">Mar</div><div class="wdl2">Mer</div><div class="wdl2">Jeu</div><div class="wdl2">Ven</div><div class="wdl2">Sam</div><div class="wdl2">Dim</div></div>
+  </div>
+  <button class="btn-home" id="btnHome">RETOUR À L'ACCUEIL</button>
+</div>
+
+<div id="historique" class="screen">
+  <div class="hih"><div class="hist-title">HISTORIQUE</div><div class="hisub">Toutes tes séances enregistrées</div></div>
+  <div class="hwt">
+    <div><div class="hwt-label">Total semaine</div><div class="hwt-val" id="histWeekKcal">0</div><div class="hwu">kcal brûlées</div></div>
+    <div style="text-align:right"><div class="hwt-label">Séances</div><div class="hwt-val" id="histWeekSessions">0</div><div class="hwu">cette semaine</div></div>
+  </div>
+  <div id="histContent"></div>
+</div>
+
+<!-- COUNTDOWN OVERLAY 3-2-1 -->
+<div class="cto" id="cto">
+  <div class="cto-label" id="ctoLabel">Prépare-toi</div>
+  <div class="cto-num" id="ctoNum">3</div>
+</div>
+
+<nav class="bnav">
+  <button class="nb on" id="nav-home"><div class="ni">⊞</div>Programme</button>
+  <button class="nb" id="nav-historique"><div class="ni">◎</div>Historique</button>
+</nav>
+</div>
+
+<script>
+const MOIS=1;
+const BASE='https://media.musclewiki.com/media/uploads/videos/branded/';
+const VIDS={
+  gobletSquat:BASE+'male-dumbbell-goblet-squat-front.mp4',
+  benchPress: BASE+'male-dumbbell-bench-press-front_y8zKZJl.mp4',
+  rowing:     BASE+'male-Dumbbells-dumbbell-single-arm-row-front.mp4',
+  gainage:    BASE+'male-bodyweight-forearm-plank-front.mp4',
+  shoulderP:  BASE+'male-dumbbell-seated-overhead-press-front.mp4',
+  curl:       BASE+'male-Dumbbells-dumbbell-curl-front.mp4',
+  gainageLat: BASE+'male-bodyweight-elbow-side-plank-front.mp4',
+  rowingB:    BASE+'male-Dumbbells-dumbbell-row-bilateral-front.mp4',
+  fentes:     BASE+'male-Dumbbells-dumbbell-alternating-forward-lunge-front.mp4',
+  souleve:    BASE+'male-Dumbbells-dumbbell-romanian-deadlift-front.mp4',
+  hipThrust:  BASE+'male-Dumbbells-dumbbell-hip-thrust-front.mp4',
+  pompes:     BASE+'male-Bodyweight-decline-push-up-front.mp4',
+  elliptique: null
+};
+const MUSCLES={
+  gobletSquat:{p:['Quadriceps','Fessiers'],s:['Ischio-jambiers','Mollets','Core']},
+  benchPress: {p:['Pectoraux','Deltoïdes ant.'],s:['Triceps','Core']},
+  rowing:     {p:['Grand dorsal','Rhomboïdes'],s:['Biceps','Trapèzes']},
+  gainage:    {p:['Core / Abdos'],s:['Fessiers','Épaules']},
+  shoulderP:  {p:['Deltoïdes','Trapèzes'],s:['Triceps','Core']},
+  curl:       {p:['Biceps'],s:['Avant-bras','Deltoïdes ant.']},
+  gainageLat: {p:['Obliques','Core latéral'],s:['Fessiers','Épaule']},
+  rowingB:    {p:['Grand dorsal','Rhomboïdes'],s:['Biceps','Trapèzes']},
+  fentes:     {p:['Quadriceps','Fessiers'],s:['Ischio-jambiers','Mollets']},
+  souleve:    {p:['Ischio-jambiers','Lombaires'],s:['Fessiers','Trapèzes']},
+  hipThrust:  {p:['Fessiers (max)','Ischio-jamb.'],s:['Core','Lombaires']},
+  pompes:     {p:['Pectoraux','Triceps'],s:['Deltoïdes ant.','Core']},
+  elliptique: {p:['Cardio complet','Jambes'],s:['Fessiers','Bras']}
+};
+
+// Elliptique step progressions
+// steps: [{min:'0-1',f:11},{min:'1-2',f:12},...]
+const ELLIPSTEPS={
+  warmup:[
+    {min:'Min 1',f:11},{min:'Min 2',f:12},{min:'Min 3',f:13},{min:'Min 4',f:14},{min:'Min 5',f:15}
+  ],
+  cardio20:[
+    {min:'Min 1-2',f:6},{min:'Min 3-4',f:7},{min:'Min 5-6',f:8},{min:'Min 7-8',f:9},
+    {min:'Min 9-10',f:10},{min:'Min 11-12',f:11},{min:'Min 13-14',f:12},{min:'Min 15-16',f:13},
+    {min:'Min 17-18',f:14},{min:'Min 19-20',f:15}
+  ],
+  cardio15:[
+    {min:'Min 1-2',f:6},{min:'Min 3-4',f:7},{min:'Min 5-6',f:8},{min:'Min 7-8',f:9},
+    {min:'Min 9-10',f:10},{min:'Min 11-12',f:11},{min:'Min 13-14',f:12},{min:'Min 15',f:13}
+  ],
+  cardio45:[
+    {min:'Min 1-5',f:6},{min:'Min 6-10',f:7},{min:'Min 11-15',f:8},{min:'Min 16-20',f:9},
+    {min:'Min 21-25',f:10},{min:'Min 26-30',f:11},{min:'Min 31-35',f:12},{min:'Min 36-40',f:13},
+    {min:'Min 41-45',f:14}
+  ],
+  warmup2:[
+    {min:'Min 1',f:10},{min:'Min 2',f:11},{min:'Min 3',f:12},{min:'Min 4',f:13},{min:'Min 5',f:14}
+  ]
+};
+
+function stepsHTML(steps){
+  const max=steps[steps.length-1].f;
+  return `<div class="esteps">
+    <div class="esteps-title">Progression force / minute</div>
+    ${steps.map(s=>`<div class="estep">
+      <span class="estep-min">${s.min}</span>
+      <div class="estep-bar"><div class="estep-fill" style="width:${Math.round(s.f/max*100)}%"></div></div>
+      <span class="estep-f">${s.f}</span>
+    </div>`).join('')}
+  </div>`;
+}
+
+function vidPanel(key){
+  const url=VIDS[key],m=MUSCLES[key]||MUSCLES.elliptique;
+  const pt=m.p.map(t=>`<span class="mt3 p">${t}</span>`).join('');
+  const st=m.s.map(t=>`<span class="mt3 s">${t}</span>`).join('');
+  const vb=url
+    ?`<div class="vp"><video src="${url}" autoplay loop muted playsinline webkit-playsinline preload="none"></video><div class="vc">© MuscleWiki</div></div>`
+    :`<div style="background:var(--cd2);border-radius:10px;height:50px;display:flex;align-items:center;justify-content:center;margin-bottom:12px;font-size:12px;color:var(--mt)">Elliptique</div>`;
+  return vb+`<div class="mtags">${pt}${st}</div>`;
+}
+
+// ══════════════════════════════════════════
+// PROGRAMME — MOIS 1 (difficulté augmentée)
+// Équipement : 2 barres + 1kg×6, 2kg×4, 5kg×4
+// Max par haltère : 1+1+2+2+5+5 = 16kg / haltère
+// ══════════════════════════════════════════
+// Durées estimées par exercice pour le coach vocal (secondes)
+// ex: {series:4, reps:12, tempoSec:3} → 4×(12×3+60repos) = ~384s = 6.4 min
+
+const P={
+  lundi:{nom:'Full Body + Cardio',duree:'55 min',kcal:420,blocks:[
+    {title:'Échauffement · 5 min',items:[
+      {t:'c',nom:'Elliptique — montée progressive',params:'Force 11→15 sur 5 minutes — augmenter de 1 chaque minute',steps:'warmup',kcal:35,vk:'elliptique',durS:300}
+    ]},
+    {title:'Musculation · 30 min — 60s repos entre séries',items:[
+      {t:'e',nom:'Goblet Squat',series:4,reps:12,charges:[15,17,19],unite:'kg',timer:60,vk:'gobletSquat',durS:384,
+       note:'Descendre jusqu\'à ce que les cuisses soient parallèles au sol'},
+      {t:'e',nom:'Développé couché',series:4,reps:10,charges:['2×14','2×16','2×16'],unite:'kg',timer:75,vk:'benchPress',durS:380,
+       note:'Augmentation charge vs semaine 1 — contrôle lent à la descente (2 sec)'},
+      {t:'e',nom:'Rowing 1 bras',series:4,reps:'10/côté',charges:[16,18,20],unite:'kg',timer:60,vk:'rowing',durS:420,
+       note:'Augmentation charge — coude haut, pause 1 sec en haut'},
+      {t:'e',nom:'Gainage frontal',series:4,reps:'45 sec',charges:[null,null,null],timer:30,ig:true,vk:'gainage',durS:300,
+       note:'Serrer le ventre, corps rigide tête-talons'},
+    ]},
+    {title:'Cardio · 20 min — montée progressive',items:[
+      {t:'c',nom:'Elliptique Zone 2 — progression',params:'Force 6→15 sur 20 min — augmenter de 1 toutes les 2 min',steps:'cardio20',kcal:185,vk:'elliptique',durS:1200}
+    ]}
+  ]},
+
+  mardi:{nom:'Cardio Zone 2 pur',duree:'45 min',kcal:430,blocks:[
+    {title:'Cardio · 45 min — montée progressive',items:[
+      {t:'c',nom:'Elliptique Zone 2 — progression',params:'Force 6→14 sur 45 min — augmenter de 1 toutes les 5 min',steps:'cardio45',kcal:430,vk:'elliptique',durS:2700}
+    ]}
+  ]},
+
+  mercredi:{nom:'Haut du corps + Cardio',duree:'55 min',kcal:390,blocks:[
+    {title:'Échauffement · 5 min',items:[
+      {t:'c',nom:'Elliptique — montée progressive',params:'Force 10→14 sur 5 min — augmenter de 1 chaque minute',steps:'warmup2',kcal:30,vk:'elliptique',durS:300}
+    ]},
+    {title:'Musculation · 30 min',items:[
+      {t:'e',nom:'Développé épaules',series:4,reps:10,charges:['2×10','2×12','2×14'],unite:'kg',timer:60,vk:'shoulderP',durS:380,
+       note:'Dos plat contre dossier — ne pas hyperétendre en fin de série'},
+      {t:'e',nom:'Rowing 1 bras',series:4,reps:'10/côté',charges:[16,18,20],unite:'kg',timer:60,vk:'rowing',durS:420,
+       note:'Même charge que lundi'},
+      {t:'e',nom:'Curl + Press combo',series:3,reps:12,charges:['2×8','2×10','2×12'],unite:'kg',timer:60,vk:'curl',durS:310,
+       note:'Curl → press enchaîné sans poser les haltères'},
+      {t:'e',nom:'Gainage latéral',series:3,reps:'45 sec/côté',charges:[null,null,null],timer:30,ig:true,vk:'gainageLat',durS:330,
+       note:'Hanche haute — ne pas laisser tomber le bassin'},
+      {t:'e',nom:'Rowing penché 2 bras',series:4,reps:10,charges:['2×12','2×14','2×16'],unite:'kg',timer:75,vk:'rowingB',durS:380,
+       note:'Penché avant dos plat à 45° — tirer les coudes vers le plafond'},
+    ]},
+    {title:'Cardio · 15 min — montée progressive',items:[
+      {t:'c',nom:'Elliptique Zone 2 — progression',params:'Force 6→13 sur 15 min — augmenter de 1 toutes les 2 min',steps:'cardio15',kcal:130,vk:'elliptique',durS:900}
+    ]}
+  ]},
+
+  jeudi:{nom:'Bas du corps + Cardio',duree:'55 min',kcal:440,blocks:[
+    {title:'Échauffement · 5 min',items:[
+      {t:'c',nom:'Elliptique — montée progressive',params:'Force 10→14 sur 5 min — augmenter de 1 chaque minute',steps:'warmup2',kcal:30,vk:'elliptique',durS:300}
+    ]},
+    {title:'Musculation · 30 min',items:[
+      {t:'e',nom:'Squat goblet',series:4,reps:12,charges:[15,17,19],unite:'kg',timer:60,vk:'gobletSquat',durS:384,
+       note:'Cuisses parallèles sol — talons bien posés'},
+      {t:'e',nom:'Fentes alternées',series:4,reps:'10/jambe',charges:['2×8','2×10','2×12'],unite:'kg',timer:60,vk:'fentes',durS:400,
+       note:'Genou avant ne dépasse pas la pointe du pied'},
+      {t:'e',nom:'Soulevé de terre',series:4,reps:10,charges:['2×14','2×16','2×16'],unite:'kg',timer:75,vk:'souleve',durS:390,
+       note:'Dos plat, hanches en arrière — contrôle à la descente'},
+      {t:'e',nom:'Hip thrust',series:4,reps:15,charges:['2×8','2×10','2×12'],unite:'kg',timer:60,vk:'hipThrust',durS:400,
+       note:'Haltères sur les hanches — serrer les fessiers en haut, hold 1 sec'},
+    ]},
+    {title:'Cardio · 15 min — montée progressive',items:[
+      {t:'c',nom:'Elliptique Zone 2 — progression',params:'Force 6→13 sur 15 min — augmenter de 1 toutes les 2 min',steps:'cardio15',kcal:130,vk:'elliptique',durS:900}
+    ]}
+  ]},
+
+  vendredi:{nom:'Circuit Full Body + HIIT',duree:'55 min',kcal:480,blocks:[
+    {title:'Échauffement · 5 min',items:[
+      {t:'c',nom:'Elliptique — montée progressive',params:'Force 11→15 sur 5 min — augmenter de 1 chaque minute',steps:'warmup',kcal:35,vk:'elliptique',durS:300}
+    ]},
+    {title:'Circuit · 4 tours — 30s repos · 2 min entre tours',items:[
+      {t:'e',nom:'Squat goblet',series:4,reps:15,charges:[null,null,null],timer:30,vk:'gobletSquat',durS:340,note:'Même charge que jeudi'},
+      {t:'e',nom:'Pompes pieds surélevés',series:4,reps:'max',charges:[null,null,null],timer:30,vk:'pompes',durS:200,note:'Pieds sur une chaise ou canapé'},
+      {t:'e',nom:'Rowing 1 bras',series:4,reps:'10/côté',charges:[null,null,null],timer:30,vk:'rowing',durS:360,note:'Même charge que lundi/mercredi'},
+      {t:'e',nom:'Fentes',series:4,reps:'12/jambe',charges:[null,null,null],timer:30,vk:'fentes',durS:380,note:'Même charge que jeudi'},
+      {t:'e',nom:'Gainage',series:4,reps:'45 sec',charges:[null,null,null],timer:30,ig:true,vk:'gainage',durS:280},
+    ]},
+    {title:'HIIT Elliptique · 16 min',items:[
+      {t:'h',nom:'HIIT Elliptique',kcal:230,vk:'elliptique',durS:960,blocs:[
+        {bloc:'Échauffement',duree:'2 min',intensite:'Force 8/15',cl:''},
+        {bloc:'Effort ×5',duree:'90 sec',intensite:'Force 13-14/15',cl:'he'},
+        {bloc:'Récup ×5',duree:'60 sec',intensite:'Force 6/15',cl:''},
+        {bloc:'Cool-down',duree:'2 min',intensite:'Force 5/15',cl:''},
+      ]}
+    ]}
+  ]}
+};
+
+const JOURS=[
+  {key:'lundi',label:'Lundi'},
+  {key:'mardi',label:'Mardi'},
+  {key:'mercredi',label:'Mercredi'},
+  {key:'jeudi',label:'Jeudi'},
+  {key:'vendredi',label:'Vendredi'},
+  {key:'weekend',label:'Sam / Dim',rest:true,kcal:300,nom:'Repos actif — 10 000 pas minimum',duree:'—'}
+];
+
+// ── STATE ──
+let curDay=null,doneSet=new Set(),total=0;
+let tInt=null,tSec=0,tTot=0,notifOn=false;
+let coachQueue=[]; // queue of phases for current exercise
+const $=id=>document.getElementById(id);
+let _mem=[];
+const getH=()=>{try{return JSON.parse(localStorage.getItem('th')||'[]')}catch{return _mem}};
+const setH=h=>{_mem=h;try{localStorage.setItem('th',JSON.stringify(h))}catch{}};
+const monStart=()=>{const n=new Date(),m=new Date(n);m.setDate(n.getDate()-((n.getDay()+6)%7));m.setHours(0,0,0,0);return m};
+const weekKcal=()=>getH().filter(e=>new Date(e.ts)>=monStart()).reduce((s,e)=>s+e.kcal,0);
+const weekSess=()=>getH().filter(e=>new Date(e.ts)>=monStart()).length;
+const dayDone=k=>getH().some(e=>e.key===k&&new Date(e.ts)>=monStart());
+
+// ── SPEECH ──
+function speak(txt){
+  if(!('speechSynthesis' in window)) return;
+  try{
+    window.speechSynthesis.cancel();
+    const u=new SpeechSynthesisUtterance(txt);
+    u.lang='fr-FR'; u.rate=1.05; u.volume=1; u.pitch=1;
+    // pick a French voice if available
+    const voices=window.speechSynthesis.getVoices();
+    const fr=voices.find(v=>v.lang.startsWith('fr'));
+    if(fr) u.voice=fr;
+    window.speechSynthesis.speak(u);
+  }catch(e){}
+}
+
+// ── RING PROGRESS ──
+const CIRC=276.46;
+function ringHTML(){
+  return `<svg viewBox="0 0 100 100" width="90" height="90" style="transform:rotate(-90deg);display:block">
+    <circle cx="50" cy="50" r="44" fill="none" stroke="#2a2a2a" stroke-width="9"/>
+    <circle id="ring-main" cx="50" cy="50" r="44" fill="none" stroke="#E8001A" stroke-width="9"
+      stroke-dasharray="${CIRC}" stroke-dashoffset="${CIRC}" stroke-linecap="round"
+      style="transition:stroke-dashoffset 1s linear"/>
+  </svg>`;
+}
+function setRing(pct){
+  const el=document.getElementById('ring-main');
+  if(el) el.style.strokeDashoffset=String(CIRC*(1-Math.max(0,Math.min(100,pct))/100));
+}
+
+// ── COUNTDOWN 3-2-1 OVERLAY ──
+function countdown321(label, onGo){
+  const cto=$('cto'), ctoL=$('ctoLabel'), ctoN=$('ctoNum');
+  ctoL.textContent=label||'Prépare-toi';
+  cto.classList.add('on');
+  let n=3;
+  function showN(val,cls,txt,speech){
+    ctoN.className=cls; ctoN.textContent=txt;
+    void ctoN.offsetWidth; ctoN.style.animation='none';
+    void ctoN.offsetHeight; ctoN.style.animation='';
+    speak(speech);
+  }
+  showN(n,'cto-num',n,String(n));
+  const iv=setInterval(()=>{
+    n--;
+    if(n>0) showN(n,'cto-num',n,String(n));
+    else if(n===0) showN(0,'cto-go','GO','Allez !');
+    else { clearInterval(iv); cto.classList.remove('on'); if(onGo) onGo(); }
+  },1000);
+}
+
+// ── GENERIC TIMED PHASE ──
+function runPhase(label, secs, onTick, onEnd){
+  stopTimer();
+  tTot=secs; tSec=secs;
+  $('coachCard').classList.add('on');
+  $('coachLabel').textContent=label;
+  updTimer();
+  setRing(100);
+  tInt=setInterval(()=>{
+    tSec--;
+    updTimer();
+    setRing(Math.round(tSec/tTot*100));
+    if(onTick) onTick(tSec);
+    if(tSec<=0){ clearInterval(tInt); tInt=null; if(onEnd) onEnd(); }
+  },1000);
+}
+
+// ── MUSCU: séquence série par série ──
+// séquence: pour chaque série → GO + sérieSecs → repos + reposSecs → série suivante
+// sérieSecs estimé : reps × 3sec (ou durS/series si fourni)
+function startExSequence(id, item){
+  const chk=$('chk-'+id);
+  if(chk.classList.contains('on')){
+    chk.classList.remove('on');
+    chk.innerHTML=`<span>${parseInt(id.slice(1))+1}</span>`;
+    $('card-'+id).classList.remove('dk2');
+    doneSet.delete(id); stopTimer(); updateProg(); allDone();
+    return;
+  }
+
+  const series=item.series||4;
+  const reposSecs=item.timer||60;
+  // Estime la durée d'une série : si isGainage, reps est "Xs sec", sinon reps*3s
+  let serieSecs;
+  if(item.ig){
+    // ex "45 sec" → parse first number
+    serieSecs=parseInt(String(item.reps))||45;
+  } else {
+    const r=parseInt(String(item.reps))||10;
+    serieSecs=r*3; // ~3 sec par rep
+  }
+
+  let currentSerie=1;
+
+  function doSerie(){
+    if(currentSerie>series){
+      // tout fini
+      speak('Exercice terminé. Bravo !');
+      vib();
+      chk.classList.add('on'); chk.textContent='✓';
+      $('card-'+id).classList.add('dk2');
+      doneSet.add(id);
+      stopTimer();
+      updateProg(); allDone();
+      return;
+    }
+    // Annonce et countdown 3-2-1 avant chaque série
+    const label=`Série ${currentSerie} sur ${series}`;
+    speak(label);
+    countdown321(label, ()=>{
+      // Lancer le timer de la série
+      const serieLabel= item.ig
+        ? `🔥 Gainage — Série ${currentSerie}/${series}`
+        : `💪 Série ${currentSerie}/${series} — ${item.reps} reps`;
+      runPhase(serieLabel, serieSecs,
+        (rem)=>{
+          if(rem===3) speak('Trois');
+          if(rem===2) speak('Deux');
+          if(rem===1) speak('Un');
+        },
+        ()=>{
+          // Série terminée
+          vib();
+          if(currentSerie<series){
+            speak(`Repos. ${reposSecs} secondes.`);
+            runPhase(`😮 Repos — ${reposSecs}s avant série ${currentSerie+1}`, reposSecs,
+              (rem)=>{
+                if(rem===10) speak('Dix secondes');
+                if(rem===3) speak('Trois');
+                if(rem===2) speak('Deux');
+                if(rem===1) speak('Un');
+              },
+              ()=>{ currentSerie++; doSerie(); }
+            );
+          } else {
+            currentSerie++;
+            doSerie(); // triggers "terminé"
+          }
+        }
+      );
+    });
+  }
+
+  doSerie();
+}
+
+// ── ELLIPTIQUE: timer avec annonces force ──
+function startElliptiqueTimer(item, cardEl, chkEl){
+  if(chkEl.classList.contains('on')){
+    chkEl.classList.remove('on'); chkEl.textContent='';
+    cardEl.classList.remove('dk2'); doneSet.delete('ell-'+item.nom);
+    stopTimer(); updateProg(); allDone();
+    return;
+  }
+
+  const steps=item.steps?ELLIPSTEPS[item.steps]:null;
+  const totalSecs=item.durS||300;
+
+  countdown321(item.nom, ()=>{
+    speak('C\'est parti ! Force '+( steps?steps[0].f:'au programme') );
+    let elapsed=0;
+    let stepIdx=0;
+
+    // Build flat timeline: for each step, how many seconds does it last?
+    // Steps have labels like "Min 1", "Min 1-2", "Min 1-5"
+    // We compute durations from totalSecs / steps.length
+    const stepDur=steps?Math.round(totalSecs/steps.length):totalSecs;
+
+    runPhase(
+      steps?`Elliptique · Force ${steps[0].f}/15`:'Elliptique en cours',
+      totalSecs,
+      (rem)=>{
+        if(!steps) return;
+        elapsed=totalSecs-rem;
+        const newIdx=Math.min(Math.floor(elapsed/stepDur), steps.length-1);
+        if(newIdx!==stepIdx){
+          stepIdx=newIdx;
+          const f=steps[stepIdx].f;
+          speak('Passe à force '+f);
+          vib();
+          $('coachLabel').textContent=`Elliptique · Force ${f}/15`;
+          const stepEls=cardEl.querySelectorAll('.estep');
+          stepEls.forEach((el,i)=>{
+            el.style.background=i===stepIdx?'rgba(232,0,26,0.18)':'';
+            el.style.borderRadius=i===stepIdx?'6px':'';
+          });
+        }
+        if(rem===30) speak('Trente secondes restantes');
+        if(rem===10) speak('Dix secondes');
+        if(rem===5) speak('Cinq');
+      },
+      ()=>{
+        speak('Cardio terminé. Bien joué !');
+        vib();
+        chkEl.classList.add('on'); chkEl.textContent='✓';
+        cardEl.classList.add('dk2');
+        doneSet.add('ell-'+item.nom);
+        updateProg(); allDone();
+      }
+    );
+  });
+}
+
+// ── HOME ──
+function buildHome(){
+  $('statKcal').textContent=weekKcal();
+  $('statDone').textContent=weekSess();
+  const list=$('dayList'); list.innerHTML='';
+  JOURS.forEach(j=>{
+    const prog=j.rest?null:P[j.key];
+    const d=!j.rest&&dayDone(j.key);
+    const el=document.createElement('div');
+    el.className='dc'+(j.rest?' rest':'')+(d?' done':'');
+    const dctop=el;
+    el.innerHTML=`<div class="dca"></div><div class="dcb">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start">
+        <div class="dcn">${j.label}</div>${d?'<div class="ddb">✓ Fait</div>':''}
+      </div>
+      <div class="dct">${j.rest?j.nom:prog.nom}</div>
+      <div class="dctg">
+        <span class="tg">${j.rest?j.duree:prog.duree}</span>
+        <span class="tg r">~${j.rest?j.kcal:prog.kcal} kcal</span>
+      </div>
+    </div>`;
+    if(!j.rest) el.addEventListener('click',()=>openSeance(j.key,j.label));
+    list.appendChild(el);
+  });
+}
+
+// ── OPEN SÉANCE ──
+function openSeance(key,label){
+  curDay=key; doneSet=new Set(); stopTimer();
+  const p=P[key];
+  $('sDayTag').textContent=label.toUpperCase();
+  $('sTitle').textContent=p.nom.toUpperCase();
+  $('sDuree').textContent='⏱ '+p.duree;
+  $('sKcal').textContent='🔥 ~'+p.kcal+' kcal';
+  const sc=$('seanceContent'); sc.innerHTML=''; total=0;
+
+  // Coach card with ring
+  const tc=document.createElement('div');
+  tc.id='coachCard'; tc.className='coach';
+  tc.innerHTML=`<div class="coach-top">
+    <div style="position:relative;flex-shrink:0;width:90px;height:90px;display:flex;align-items:center;justify-content:center">
+      ${ringHTML()}
+      <div style="position:absolute;text-align:center;line-height:1.2">
+        <div class="tcd" id="timerDisp" style="font-size:20px!important">0:00</div>
+      </div>
+    </div>
+    <div class="coach-info" style="flex:1;min-width:0;padding-left:12px">
+      <div class="coach-label" id="coachLabel">—</div>
+    </div>
+    <button class="coach-skip" id="timerSkip">Passer</button>
+  </div>`;
+  sc.appendChild(tc);
+  tc.querySelector('#timerSkip').addEventListener('click',stopTimer);
+
+  let idx=0;
+  p.blocks.forEach(b=>{
+    const bh=document.createElement('div');
+    bh.className='bh'; bh.textContent=b.title; sc.appendChild(bh);
+    b.items.forEach(item=>{
+      total++;
+      if(item.t==='e') sc.appendChild(mkEx(item,idx));
+      else if(item.t==='c') sc.appendChild(mkCardio(item,idx));
+      else if(item.t==='h') sc.appendChild(mkHiit(item,idx));
+      idx++;
+    });
+  });
+
+  updateProg();
+  $('btnFinish').disabled=true;
+  navTo('seance');
+}
+
+function mkEx(item,idx){
+  const id='x'+idx;
+  const c=item.charges?item.charges[MOIS-1]:null;
+  const cs=c?(c+(item.unite?' '+item.unite:'')):(item.note||'');
+  const detail=cs?`${item.series} séries × ${item.reps} · ${cs}`:`${item.series} séries × ${item.reps}`;
+  const cBox=c?`<div class="ebox"><div class="ebl">Charge</div><div class="ebv" style="font-size:14px">${c}${item.unite?' '+item.unite:''}</div></div>`:'';
+  const tEst=item.durS?Math.round(item.durS/60)+'min':'—';
+  const el=document.createElement('div');
+  el.className='ec'; el.id='card-'+id;
+  el.innerHTML=`
+    <div class="em" id="main-${id}">
+      <div class="eck" id="chk-${id}"><span>${idx+1}</span></div>
+      <div class="ei"><div class="en">${item.nom}</div><div class="ed">${detail}</div></div>
+      <div class="ea">›</div>
+    </div>
+    <div class="eex" id="exp-${id}">
+      ${vidPanel(item.vk||'elliptique')}
+      <div class="egrid">
+        <div class="ebox"><div class="ebl">Séries</div><div class="ebv">${item.series}</div></div>
+        <div class="ebox"><div class="ebl">Reps</div><div class="ebv">${item.reps}</div></div>
+        ${cBox}
+        <div class="ebox"><div class="ebl">Repos</div><div class="ebv">${item.timer||60}s</div></div>
+        <div class="ebox"><div class="ebl">Durée ~</div><div class="ebv" style="font-size:13px">${tEst}</div></div>
+      </div>
+      ${item.note?`<div class="enote">💡 ${item.note}</div>`:''}
+    </div>`;
+  el.querySelector('#chk-'+id).addEventListener('click',e=>{e.stopPropagation();startExSequence(id,item)});
+  el.querySelector('#main-'+id).addEventListener('click',()=>expand(id));
+  return el;
+}
+
+function mkCardio(item,idx){
+  const id='x'+idx;
+  const el=document.createElement('div');
+  el.className='cc'; el.id='card-'+id;
+  const sHTML=item.steps?stepsHTML(ELLIPSTEPS[item.steps]):'';
+  el.innerHTML=`
+    <div class="cm">
+      <span class="cn">${item.nom}</span>
+      <div class="cck" id="chk-${id}"></div>
+    </div>
+    <div class="cp">${item.params}</div>
+    ${sHTML}`;
+  const chk=el.querySelector('#chk-'+id);
+  chk.addEventListener('click',()=>startElliptiqueTimer(item,el,chk));
+  return el;
+}
+
+function mkHiit(item,idx){
+  const id='x'+idx;
+  const el=document.createElement('div');
+  el.className='cc'; el.id='card-'+id;
+  const rows=item.blocs.map(b=>`<tr><td class="${b.cl}">${b.bloc}</td><td>${b.duree}</td><td style="color:var(--mt2)">${b.intensite}</td></tr>`).join('');
+  el.innerHTML=`
+    <div class="cm">
+      <span class="cn">${item.nom} · ~${item.kcal} kcal</span>
+      <div class="cck" id="chk-${id}"></div>
+    </div>
+    <table class="ht2">${rows}</table>`;
+  el.querySelector('#chk-'+id).addEventListener('click',()=>{
+    const chk=$('chk-'+id);
+    if(chk.classList.contains('on')){
+      chk.classList.remove('on'); chk.textContent='';
+      el.classList.remove('dk2'); doneSet.delete(id);
+    } else {
+      chk.classList.add('on'); chk.textContent='✓';
+      el.classList.add('dk2'); doneSet.add(id); vib();
+    }
+    updateProg(); allDone();
+  });
+  return el;
+}
+
+function expand(id){
+  const card=$('card-'+id);
+  card.classList.toggle('exp');
+  const arrow=card.querySelector('.ea');
+  if(arrow) arrow.textContent=card.classList.contains('exp')?'⌄':'›';
+}
+
+function allDone(){$('btnFinish').disabled=doneSet.size<total}
+function updateProg(){
+  const p=total>0?Math.round(doneSet.size/total*100):0;
+  $('progPct').textContent=p+'%';
+  $('progFill').style.width=p+'%';
+}
+
+function updTimer(){
+  const s=tSec, str=Math.floor(s/60)+':'+String(s%60).padStart(2,'0');
+  const d=$('timerDisp'); if(d){ d.textContent=str; d.className='tcd'+(s<=5?' urg':''); }
+}
+function stopTimer(){
+  if(tInt){ clearInterval(tInt); tInt=null; }
+  const c=$('coachCard'); if(c) c.classList.remove('on');
+}
+function vib(){try{navigator.vibrate&&navigator.vibrate([80,40,80])}catch{}}
+
+// ── RECAP ──
+function showRecap(){
+  const p=P[curDay];
+  const lbl=JOURS.find(j=>j.key===curDay)?.label||'';
+  stopTimer();
+  const h=getH();
+  h.unshift({key:curDay,label:lbl,nom:p.nom,kcal:p.kcal,ts:new Date().toISOString()});
+  setH(h.slice(0,100));
+  $('recapSub').textContent=lbl+' — '+p.nom;
+  $('recapKcal').textContent='~'+p.kcal;
+  const ne=p.blocks.reduce((n,b)=>n+b.items.filter(i=>i.t==='e').length,0);
+  $('recapGrid').innerHTML=`
+    <div class="rs"><div class="rsl">Durée</div><div class="recap-stat-val">${p.duree}</div></div>
+    <div class="rs"><div class="rsl">Kcal semaine</div><div class="recap-stat-val" style="color:var(--red)">${weekKcal()}</div><div class="rss">sur 2 050 objectif</div></div>
+    <div class="rs"><div class="rsl">Exercices</div><div class="recap-stat-val">${ne}</div></div>
+    <div class="rs"><div class="rsl">Séances sem.</div><div class="recap-stat-val">${weekSess()}</div></div>`;
+  buildBars(); confetti(); navTo('recap');
+  speak('Bravo ! Séance terminée. '+p.kcal+' calories brûlées !');
+}
+
+function buildBars(){
+  const keys=['lundi','mardi','mercredi','jeudi','vendredi','weekend','weekend'];
+  const kc=[420,430,390,440,480,300,300];
+  const now=new Date(),ti=(now.getDay()+6)%7;
+  const mon=monStart(),h=getH();
+  const el=$('weekBars'); el.innerHTML='';
+  keys.forEach((k,i)=>{
+    const dd=h.some(e=>{const d=new Date(e.ts);return e.key===k&&d>=mon&&(d.getDay()+6)%7===i});
+    const b=document.createElement('div');
+    b.className='wb'+(i===ti?' td':dd?' dn':'');
+    b.style.height=Math.round(kc[i]/480*100)+'%';
+    el.appendChild(b);
+  });
+}
+
+function confetti(){
+  const cols=['#E8001A','#F5F3EF','#ff6b6b','#fff','#A8000F'];
+  for(let i=0;i<18;i++) setTimeout(()=>{
+    const el=document.createElement('div'); el.className='cfp';
+    el.style.cssText=`left:${Math.random()*90+5}vw;top:${50+Math.random()*20}vh;background:${cols[~~(Math.random()*cols.length)]};animation-duration:${.8+Math.random()*.7}s;animation-delay:${Math.random()*.3}s`;
+    $('app').appendChild(el); setTimeout(()=>el.remove(),1600);
+  },i*60);
+}
+
+function buildHist(){
+  $('histWeekKcal').textContent=weekKcal();
+  $('histWeekSessions').textContent=weekSess();
+  const h=getH(),c=$('histContent');
+  if(!h.length){c.innerHTML=`<div class="hiemp"><div class="hiempi">📋</div><div class="hiempt">Aucune séance enregistrée.<br>Lance ta première séance !</div></div>`;return}
+  let html='<div class="hil">';
+  h.slice(0,30).forEach(e=>{
+    const d=new Date(e.ts);
+    const ds=d.toLocaleDateString('fr-FR',{weekday:'short',day:'numeric',month:'short'});
+    const ts=d.toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'});
+    html+=`<div class="hie"><div class="hid"></div><div class="hii"><div class="hiday">${e.label} — ${e.nom}</div><div class="hidate">${ds} à ${ts}</div></div><div class="hist-kcal">~${e.kcal}</div></div>`;
+  });
+  html+='</div><button class="hicl" id="histClear">🗑 Réinitialiser l\'historique</button>';
+  c.innerHTML=html;
+  $('histClear').addEventListener('click',()=>{if(confirm('Supprimer tout l\'historique ?')){setH([]);buildHist();buildHome();}});
+}
+
+function toggleNotif(){
+  if(!notifOn){
+    if('Notification' in window){
+      Notification.requestPermission().then(p=>{
+        if(p==='granted'){notifOn=true;updNotif();}
+        else $('notifSub').textContent='Permission refusée';
+      });
+    } else{notifOn=true;updNotif();}
+  } else{notifOn=false;updNotif();}
+}
+function updNotif(){
+  $('notifToggle').classList.toggle('on',notifOn);
+  $('notifSub').textContent=notifOn?'Rappel quotidien activé':'Désactivé';
+}
+
+function navTo(s){
+  document.querySelectorAll('.screen').forEach(el=>el.classList.remove('active'));
+  document.querySelectorAll('.nb').forEach(el=>el.classList.remove('on'));
+  $(s).classList.add('active');
+  const nb=$('nav-'+s); if(nb) nb.classList.add('on');
+  window.scrollTo({top:0,behavior:'instant'});
+  if(s==='historique') buildHist();
+  if(s==='home') buildHome();
+}
+function goHome(){stopTimer();navTo('home')}
+
+$('backBtn').addEventListener('click',goHome);
+$('btnFinish').addEventListener('click',showRecap);
+$('btnHome').addEventListener('click',goHome);
+$('notifBtn').addEventListener('click',toggleNotif);
+$('nav-home').addEventListener('click',()=>navTo('home'));
+$('nav-historique').addEventListener('click',()=>navTo('historique'));
+
+buildHome();
+</script>
+</body>
+</html>
