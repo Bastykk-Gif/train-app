@@ -123,6 +123,20 @@ body{min-height:100%;background:var(--bk);color:var(--w);font-family:var(--fb);f
 .tbf{height:100%;background:var(--red);border-radius:2px;transition:width 1s linear}
 .coach-skip{background:var(--cd2);border:1px solid var(--br);border-radius:8px;padding:10px 14px;font-family:var(--fc);font-size:12px;font-weight:600;color:var(--mt2);cursor:pointer;flex-shrink:0;min-width:44px;min-height:44px;display:flex;align-items:center;justify-content:center;-webkit-tap-highlight-color:transparent}
 
+/* INLINE EXERCISE COACH */
+.ex-coach{
+  display:none;background:var(--dk);
+  border-left:3px solid var(--red);border-radius:0 var(--rad) var(--rad) 0;
+  padding:12px 14px;margin:0 0 0 0;
+}
+.ex-coach.on{display:flex;align-items:center;gap:12px;animation:coachIn .2s ease}
+.ex-coach-ring{position:relative;flex-shrink:0;width:72px;height:72px;display:flex;align-items:center;justify-content:center}
+.ex-coach-info{flex:1;min-width:0}
+.ex-coach-label{font-family:var(--fc);font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--red);margin-bottom:2px}
+.ex-coach-time{font-family:var(--fd);font-size:28px;color:var(--w);line-height:1}
+.ex-coach-time.urg{color:var(--red);animation:blink .5s ease infinite}
+.ex-coach-skip{background:rgba(232,0,26,0.15);border:1px solid var(--red);border-radius:8px;padding:8px 12px;font-family:var(--fc);font-size:11px;font-weight:600;color:var(--red);cursor:pointer;flex-shrink:0;min-height:44px;display:flex;align-items:center;-webkit-tap-highlight-color:transparent}
+
 /* COUNTDOWN OVERLAY */
 .cto{
   position:fixed;inset:0;background:rgba(10,10,10,.92);
@@ -403,11 +417,11 @@ const P={
       {t:'c',nom:'Elliptique — montée progressive',params:'Force 11→15 sur 5 minutes — augmenter de 1 chaque minute',steps:'warmup',kcal:35,vk:'elliptique',durS:300}
     ]},
     {title:'Musculation · 30 min — 60s repos entre séries',items:[
-      {t:'e',nom:'Goblet Squat',series:4,reps:12,charges:[15,17,19],unite:'kg',timer:60,vk:'gobletSquat',durS:384,
+      {t:'e',nom:'Goblet Squat',series:4,reps:12,charges:[15,17,19],unite:'kg',timer:40,vk:'gobletSquat',durS:384,
        note:'Descendre jusqu\'à ce que les cuisses soient parallèles au sol'},
-      {t:'e',nom:'Développé couché',series:4,reps:10,charges:['2×14','2×16','2×16'],unite:'kg',timer:75,vk:'benchPress',durS:380,
+      {t:'e',nom:'Développé couché',series:4,reps:10,charges:['2×14','2×16','2×16'],unite:'kg',timer:40,vk:'benchPress',durS:380,
        note:'Augmentation charge vs semaine 1 — contrôle lent à la descente (2 sec)'},
-      {t:'e',nom:'Rowing 1 bras',series:4,reps:'10/côté',charges:[16,18,20],unite:'kg',timer:60,vk:'rowing',durS:420,
+      {t:'e',nom:'Rowing 1 bras',series:4,reps:'10/côté',charges:[16,18,20],unite:'kg',timer:40,vk:'rowing',durS:420,
        note:'Augmentation charge — coude haut, pause 1 sec en haut'},
       {t:'e',nom:'Gainage frontal',series:4,reps:'45 sec',charges:[null,null,null],timer:30,ig:true,vk:'gainage',durS:300,
        note:'Serrer le ventre, corps rigide tête-talons'},
@@ -428,15 +442,15 @@ const P={
       {t:'c',nom:'Elliptique — montée progressive',params:'Force 10→14 sur 5 min — augmenter de 1 chaque minute',steps:'warmup2',kcal:30,vk:'elliptique',durS:300}
     ]},
     {title:'Musculation · 30 min',items:[
-      {t:'e',nom:'Développé épaules',series:4,reps:10,charges:['2×10','2×12','2×14'],unite:'kg',timer:60,vk:'shoulderP',durS:380,
+      {t:'e',nom:'Développé épaules',series:4,reps:10,charges:['2×6','2×8','2×10'],unite:'kg',timer:40,vk:'shoulderP',durS:320,
        note:'Dos plat contre dossier — ne pas hyperétendre en fin de série'},
-      {t:'e',nom:'Rowing 1 bras',series:4,reps:'10/côté',charges:[16,18,20],unite:'kg',timer:60,vk:'rowing',durS:420,
+      {t:'e',nom:'Rowing 1 bras',series:4,reps:'10/côté',charges:[16,18,20],unite:'kg',timer:40,vk:'rowing',durS:420,
        note:'Même charge que lundi'},
-      {t:'e',nom:'Curl + Press combo',series:3,reps:12,charges:['2×8','2×10','2×12'],unite:'kg',timer:60,vk:'curl',durS:310,
+      {t:'e',nom:'Curl + Press combo',series:3,reps:12,charges:['2×8','2×10','2×12'],unite:'kg',timer:40,vk:'curl',durS:310,
        note:'Curl → press enchaîné sans poser les haltères'},
       {t:'e',nom:'Gainage latéral',series:3,reps:'45 sec/côté',charges:[null,null,null],timer:30,ig:true,vk:'gainageLat',durS:330,
        note:'Hanche haute — ne pas laisser tomber le bassin'},
-      {t:'e',nom:'Rowing penché 2 bras',series:4,reps:10,charges:['2×12','2×14','2×16'],unite:'kg',timer:75,vk:'rowingB',durS:380,
+      {t:'e',nom:'Rowing penché 2 bras',series:4,reps:10,charges:['2×12','2×14','2×16'],unite:'kg',timer:40,vk:'rowingB',durS:380,
        note:'Penché avant dos plat à 45° — tirer les coudes vers le plafond'},
     ]},
     {title:'Cardio · 15 min — montée progressive',items:[
@@ -449,13 +463,13 @@ const P={
       {t:'c',nom:'Elliptique — montée progressive',params:'Force 10→14 sur 5 min — augmenter de 1 chaque minute',steps:'warmup2',kcal:30,vk:'elliptique',durS:300}
     ]},
     {title:'Musculation · 30 min',items:[
-      {t:'e',nom:'Squat goblet',series:4,reps:12,charges:[15,17,19],unite:'kg',timer:60,vk:'gobletSquat',durS:384,
+      {t:'e',nom:'Squat goblet',series:4,reps:12,charges:[15,17,19],unite:'kg',timer:40,vk:'gobletSquat',durS:384,
        note:'Cuisses parallèles sol — talons bien posés'},
-      {t:'e',nom:'Fentes alternées',series:4,reps:'10/jambe',charges:['2×8','2×10','2×12'],unite:'kg',timer:60,vk:'fentes',durS:400,
+      {t:'e',nom:'Fentes alternées',series:4,reps:'10/jambe',charges:['2×8','2×10','2×12'],unite:'kg',timer:40,vk:'fentes',durS:400,
        note:'Genou avant ne dépasse pas la pointe du pied'},
-      {t:'e',nom:'Soulevé de terre',series:4,reps:10,charges:['2×14','2×16','2×16'],unite:'kg',timer:75,vk:'souleve',durS:390,
+      {t:'e',nom:'Soulevé de terre',series:4,reps:10,charges:['2×14','2×16','2×16'],unite:'kg',timer:40,vk:'souleve',durS:390,
        note:'Dos plat, hanches en arrière — contrôle à la descente'},
-      {t:'e',nom:'Hip thrust',series:4,reps:15,charges:['2×8','2×10','2×12'],unite:'kg',timer:60,vk:'hipThrust',durS:400,
+      {t:'e',nom:'Hip thrust',series:4,reps:15,charges:['2×8','2×10','2×12'],unite:'kg',timer:40,vk:'hipThrust',durS:400,
        note:'Haltères sur les hanches — serrer les fessiers en haut, hold 1 sec'},
     ]},
     {title:'Cardio · 15 min — montée progressive',items:[
@@ -532,9 +546,15 @@ function ringHTML(){
       style="transition:stroke-dashoffset 1s linear"/>
   </svg>`;
 }
-function setRing(pct){
-  const el=document.getElementById('ring-main');
+function setRingEl(ringId,pct){
+  const el=document.getElementById(ringId);
   if(el) el.style.strokeDashoffset=String(CIRC*(1-Math.max(0,Math.min(100,pct))/100));
+}
+function updTimerEl(el,sec,tot){
+  if(!el) return;
+  const str=Math.floor(sec/60)+':'+String(sec%60).padStart(2,'0');
+  el.textContent=str;
+  el.className='ex-coach-time'+(sec<=5?' urg':'');
 }
 
 // ── COUNTDOWN 3-2-1 OVERLAY ──
@@ -559,99 +579,100 @@ function countdown321(label, onGo){
 }
 
 // ── GENERIC TIMED PHASE ──
-function runPhase(label, secs, onTick, onEnd){
+// ringId: SVG circle element id, skipFn: called when skip pressed
+let activeSkipFn=null;
+function runPhase(label, secs, ringId, labelElId, timeElId, skipBtnId, onTick, onEnd){
   stopTimer();
   tTot=secs; tSec=secs;
-  $('coachCard').classList.add('on');
-  $('coachLabel').textContent=label;
-  updTimer();
-  setRing(100);
+  const labelEl=document.getElementById(labelElId);
+  const timeEl=document.getElementById(timeElId);
+  const skipBtn=document.getElementById(skipBtnId);
+  const coachEl=skipBtn?skipBtn.closest('.ex-coach'):null;
+  if(coachEl) coachEl.classList.add('on');
+  if(labelEl) labelEl.textContent=label;
+  updTimerEl(timeEl,secs,secs);
+  setRingEl(ringId,100);
+  activeSkipFn=onEnd; // skip = finish current phase immediately
   tInt=setInterval(()=>{
     tSec--;
-    updTimer();
-    setRing(Math.round(tSec/tTot*100));
+    updTimerEl(timeEl,tSec,tTot);
+    setRingEl(ringId,Math.round(tSec/tTot*100));
     if(onTick) onTick(tSec);
-    if(tSec<=0){ clearInterval(tInt); tInt=null; if(onEnd) onEnd(); }
+    if(tSec<=0){ clearInterval(tInt); tInt=null; activeSkipFn=null; if(onEnd) onEnd(); }
   },1000);
 }
 
-// ── MUSCU: séquence série par série ──
-// séquence: pour chaque série → GO + sérieSecs → repos + reposSecs → série suivante
-// sérieSecs estimé : reps × 3sec (ou durS/series si fourni)
+// ── MUSCU: séquence série par série avec coach inline ──
 function startExSequence(id, item){
   const chk=$('chk-'+id);
   if(chk.classList.contains('on')){
     chk.classList.remove('on');
     chk.innerHTML=`<span>${parseInt(id.slice(1))+1}</span>`;
     $('card-'+id).classList.remove('dk2');
+    const coach=$('coach-'+id);
+    if(coach) coach.classList.remove('on');
     doneSet.delete(id); stopTimer(); updateProg(); allDone();
     return;
   }
 
   const series=item.series||4;
-  const reposSecs=item.timer||60;
-  // Estime la durée d'une série : si isGainage, reps est "Xs sec", sinon reps*3s
-  let serieSecs;
-  if(item.ig){
-    // ex "45 sec" → parse first number
-    serieSecs=parseInt(String(item.reps))||45;
-  } else {
-    const r=parseInt(String(item.reps))||10;
-    serieSecs=r*3; // ~3 sec par rep
-  }
+  const reposSecs=item.timer||40;
+  let serieSecs=item.ig ? (parseInt(String(item.reps))||45) : (parseInt(String(item.reps))||10)*3;
+
+  const ringId='ring-'+id;
+  const labelElId='clabel-'+id;
+  const timeElId='ctime-'+id;
+  const skipBtnId='cskip-'+id;
+  const coachEl=$('coach-'+id);
 
   let currentSerie=1;
 
-  function doSerie(){
-    if(currentSerie>series){
-      // tout fini
-      speak('Exercice terminé. Bravo !');
-      vib();
-      chk.classList.add('on'); chk.textContent='✓';
-      $('card-'+id).classList.add('dk2');
-      doneSet.add(id);
-      stopTimer();
-      updateProg(); allDone();
-      return;
-    }
-    // Annonce et countdown 3-2-1 avant chaque série
-    const label=`Série ${currentSerie} sur ${series}`;
-    speak(label);
-    countdown321(label, ()=>{
-      // Lancer le timer de la série
-      const serieLabel= item.ig
-        ? `🔥 Gainage — Série ${currentSerie}/${series}`
-        : `💪 Série ${currentSerie}/${series} — ${item.reps} reps`;
-      runPhase(serieLabel, serieSecs,
-        (rem)=>{
-          if(rem===3) speak('Trois');
-          if(rem===2) speak('Deux');
-          if(rem===1) speak('Un');
-        },
-        ()=>{
-          // Série terminée
-          vib();
-          if(currentSerie<series){
-            speak(`Repos. ${reposSecs} secondes.`);
-            runPhase(`😮 Repos — ${reposSecs}s avant série ${currentSerie+1}`, reposSecs,
-              (rem)=>{
-                if(rem===10) speak('Dix secondes');
-                if(rem===3) speak('Trois');
-                if(rem===2) speak('Deux');
-                if(rem===1) speak('Un');
-              },
-              ()=>{ currentSerie++; doSerie(); }
-            );
-          } else {
-            currentSerie++;
-            doSerie(); // triggers "terminé"
-          }
-        }
-      );
-    });
+  function finishEx(){
+    speak('Exercice terminé. Bravo !');
+    vib();
+    chk.classList.add('on'); chk.textContent='✓';
+    $('card-'+id).classList.add('dk2');
+    if(coachEl) coachEl.classList.remove('on');
+    doneSet.add(id);
+    stopTimer();
+    updateProg(); allDone();
   }
 
-  doSerie();
+  function doReps(){
+    if(currentSerie>series){ finishEx(); return; }
+    const serieLabel=item.ig
+      ? `🔥 Gainage — ${currentSerie}/${series}`
+      : `💪 Série ${currentSerie}/${series} · ${item.reps} reps`;
+    // skip during reps = validate serie immediately → go to rest
+    activeSkipFn=()=>{ clearInterval(tInt); tInt=null; afterReps(); };
+    runPhase(serieLabel, serieSecs, ringId, labelElId, timeElId, skipBtnId,
+      (rem)=>{ if(rem<=3&&rem>0) speak(String(rem)); },
+      afterReps
+    );
+  }
+
+  function afterReps(){
+    vib();
+    if(currentSerie<series){
+      const restLabel=`😮 Repos ${reposSecs}s — série ${currentSerie+1} dans…`;
+      speak(`Repos. ${reposSecs} secondes.`);
+      // skip during rest = skip rest, go to next serie
+      activeSkipFn=()=>{ clearInterval(tInt); tInt=null; currentSerie++; doCountdownSerie(); };
+      runPhase(restLabel, reposSecs, ringId, labelElId, timeElId, skipBtnId,
+        (rem)=>{ if(rem===10) speak('Dix secondes'); if(rem<=3&&rem>0) speak(String(rem)); },
+        ()=>{ currentSerie++; doCountdownSerie(); }
+      );
+    } else {
+      currentSerie++;
+      finishEx();
+    }
+  }
+
+  function doCountdownSerie(){
+    countdown321(`Série ${currentSerie} sur ${series}`, doReps);
+  }
+
+  doCountdownSerie();
 }
 
 // ── ELLIPTIQUE: timer avec annonces force ──
@@ -659,38 +680,41 @@ function startElliptiqueTimer(item, cardEl, chkEl){
   if(chkEl.classList.contains('on')){
     chkEl.classList.remove('on'); chkEl.textContent='';
     cardEl.classList.remove('dk2'); doneSet.delete('ell-'+item.nom);
+    const coach=cardEl.querySelector('.ex-coach');
+    if(coach) coach.classList.remove('on');
     stopTimer(); updateProg(); allDone();
     return;
   }
-
+  const cardId=cardEl.id.replace('card-','');
+  const ringId='ring-'+cardId;
+  const labelElId='clabel-'+cardId;
+  const timeElId='ctime-'+cardId;
+  const skipBtnId='cskip-'+cardId;
+  const coachEl=cardEl.querySelector('.ex-coach');
   const steps=item.steps?ELLIPSTEPS[item.steps]:null;
   const totalSecs=item.durS||300;
 
   countdown321(item.nom, ()=>{
-    speak('C\'est parti ! Force '+( steps?steps[0].f:'au programme') );
-    let elapsed=0;
-    let stepIdx=0;
-
-    // Build flat timeline: for each step, how many seconds does it last?
-    // Steps have labels like "Min 1", "Min 1-2", "Min 1-5"
-    // We compute durations from totalSecs / steps.length
+    speak('C\'est parti ! Force '+(steps?steps[0].f:'au programme'));
+    if(coachEl) coachEl.classList.add('on');
+    let elapsed=0, stepIdx=0;
     const stepDur=steps?Math.round(totalSecs/steps.length):totalSecs;
+    activeSkipFn=null;
 
     runPhase(
       steps?`Elliptique · Force ${steps[0].f}/15`:'Elliptique en cours',
-      totalSecs,
+      totalSecs, ringId, labelElId, timeElId, skipBtnId,
       (rem)=>{
         if(!steps) return;
         elapsed=totalSecs-rem;
-        const newIdx=Math.min(Math.floor(elapsed/stepDur), steps.length-1);
+        const newIdx=Math.min(Math.floor(elapsed/stepDur),steps.length-1);
         if(newIdx!==stepIdx){
           stepIdx=newIdx;
           const f=steps[stepIdx].f;
-          speak('Passe à force '+f);
-          vib();
-          $('coachLabel').textContent=`Elliptique · Force ${f}/15`;
-          const stepEls=cardEl.querySelectorAll('.estep');
-          stepEls.forEach((el,i)=>{
+          speak('Passe à force '+f); vib();
+          const lEl=$(labelElId);
+          if(lEl) lEl.textContent=`Elliptique · Force ${f}/15`;
+          cardEl.querySelectorAll('.estep').forEach((el,i)=>{
             el.style.background=i===stepIdx?'rgba(232,0,26,0.18)':'';
             el.style.borderRadius=i===stepIdx?'6px':'';
           });
@@ -700,10 +724,10 @@ function startElliptiqueTimer(item, cardEl, chkEl){
         if(rem===5) speak('Cinq');
       },
       ()=>{
-        speak('Cardio terminé. Bien joué !');
-        vib();
+        speak('Cardio terminé. Bien joué !'); vib();
         chkEl.classList.add('on'); chkEl.textContent='✓';
         cardEl.classList.add('dk2');
+        if(coachEl) coachEl.classList.remove('on');
         doneSet.add('ell-'+item.nom);
         updateProg(); allDone();
       }
@@ -747,24 +771,6 @@ function openSeance(key,label){
   $('sKcal').textContent='🔥 ~'+p.kcal+' kcal';
   const sc=$('seanceContent'); sc.innerHTML=''; total=0;
 
-  // Coach card with ring
-  const tc=document.createElement('div');
-  tc.id='coachCard'; tc.className='coach';
-  tc.innerHTML=`<div class="coach-top">
-    <div style="position:relative;flex-shrink:0;width:90px;height:90px;display:flex;align-items:center;justify-content:center">
-      ${ringHTML()}
-      <div style="position:absolute;text-align:center;line-height:1.2">
-        <div class="tcd" id="timerDisp" style="font-size:20px!important">0:00</div>
-      </div>
-    </div>
-    <div class="coach-info" style="flex:1;min-width:0;padding-left:12px">
-      <div class="coach-label" id="coachLabel">—</div>
-    </div>
-    <button class="coach-skip" id="timerSkip">Passer</button>
-  </div>`;
-  sc.appendChild(tc);
-  tc.querySelector('#timerSkip').addEventListener('click',stopTimer);
-
   let idx=0;
   p.blocks.forEach(b=>{
     const bh=document.createElement('div');
@@ -790,6 +796,7 @@ function mkEx(item,idx){
   const detail=cs?`${item.series} séries × ${item.reps} · ${cs}`:`${item.series} séries × ${item.reps}`;
   const cBox=c?`<div class="ebox"><div class="ebl">Charge</div><div class="ebv" style="font-size:14px">${c}${item.unite?' '+item.unite:''}</div></div>`:'';
   const tEst=item.durS?Math.round(item.durS/60)+'min':'—';
+  const RC=CIRC.toFixed(1);
   const el=document.createElement('div');
   el.className='ec'; el.id='card-'+id;
   el.innerHTML=`
@@ -798,19 +805,40 @@ function mkEx(item,idx){
       <div class="ei"><div class="en">${item.nom}</div><div class="ed">${detail}</div></div>
       <div class="ea">›</div>
     </div>
+    <div class="ex-coach" id="coach-${id}">
+      <div class="ex-coach-ring">
+        <svg viewBox="0 0 100 100" width="72" height="72" style="transform:rotate(-90deg);display:block">
+          <circle cx="50" cy="50" r="44" fill="none" stroke="#2a2a2a" stroke-width="10"/>
+          <circle id="ring-${id}" cx="50" cy="50" r="44" fill="none" stroke="#E8001A" stroke-width="10"
+            stroke-dasharray="${RC}" stroke-dashoffset="${RC}" stroke-linecap="round"
+            style="transition:stroke-dashoffset 1s linear"/>
+        </svg>
+        <div style="position:absolute;text-align:center">
+          <div class="ex-coach-time" id="ctime-${id}">0:00</div>
+        </div>
+      </div>
+      <div class="ex-coach-info">
+        <div class="ex-coach-label" id="clabel-${id}">—</div>
+      </div>
+      <button class="ex-coach-skip" id="cskip-${id}">Valider →</button>
+    </div>
     <div class="eex" id="exp-${id}">
       ${vidPanel(item.vk||'elliptique')}
       <div class="egrid">
         <div class="ebox"><div class="ebl">Séries</div><div class="ebv">${item.series}</div></div>
         <div class="ebox"><div class="ebl">Reps</div><div class="ebv">${item.reps}</div></div>
         ${cBox}
-        <div class="ebox"><div class="ebl">Repos</div><div class="ebv">${item.timer||60}s</div></div>
+        <div class="ebox"><div class="ebl">Repos</div><div class="ebv">${item.timer||40}s</div></div>
         <div class="ebox"><div class="ebl">Durée ~</div><div class="ebv" style="font-size:13px">${tEst}</div></div>
       </div>
       ${item.note?`<div class="enote">💡 ${item.note}</div>`:''}
     </div>`;
   el.querySelector('#chk-'+id).addEventListener('click',e=>{e.stopPropagation();startExSequence(id,item)});
   el.querySelector('#main-'+id).addEventListener('click',()=>expand(id));
+  el.querySelector('#cskip-'+id).addEventListener('click',e=>{
+    e.stopPropagation();
+    if(activeSkipFn){ const fn=activeSkipFn; activeSkipFn=null; clearInterval(tInt); tInt=null; fn(); }
+  });
   return el;
 }
 
@@ -819,12 +847,30 @@ function mkCardio(item,idx){
   const el=document.createElement('div');
   el.className='cc'; el.id='card-'+id;
   const sHTML=item.steps?stepsHTML(ELLIPSTEPS[item.steps]):'';
+  const RC=CIRC.toFixed(1);
   el.innerHTML=`
     <div class="cm">
       <span class="cn">${item.nom}</span>
       <div class="cck" id="chk-${id}"></div>
     </div>
     <div class="cp">${item.params}</div>
+    <div class="ex-coach" id="coach-${id}">
+      <div class="ex-coach-ring">
+        <svg viewBox="0 0 100 100" width="72" height="72" style="transform:rotate(-90deg);display:block">
+          <circle cx="50" cy="50" r="44" fill="none" stroke="#2a2a2a" stroke-width="10"/>
+          <circle id="ring-${id}" cx="50" cy="50" r="44" fill="none" stroke="#E8001A" stroke-width="10"
+            stroke-dasharray="${RC}" stroke-dashoffset="${RC}" stroke-linecap="round"
+            style="transition:stroke-dashoffset 1s linear"/>
+        </svg>
+        <div style="position:absolute;text-align:center">
+          <div class="ex-coach-time" id="ctime-${id}">0:00</div>
+        </div>
+      </div>
+      <div class="ex-coach-info">
+        <div class="ex-coach-label" id="clabel-${id}">—</div>
+      </div>
+      <button class="ex-coach-skip" id="cskip-${id}">Passer →</button>
+    </div>
     ${sHTML}`;
   const chk=el.querySelector('#chk-'+id);
   chk.addEventListener('click',()=>startElliptiqueTimer(item,el,chk));
@@ -870,13 +916,12 @@ function updateProg(){
   $('progFill').style.width=p+'%';
 }
 
-function updTimer(){
-  const s=tSec, str=Math.floor(s/60)+':'+String(s%60).padStart(2,'0');
-  const d=$('timerDisp'); if(d){ d.textContent=str; d.className='tcd'+(s<=5?' urg':''); }
-}
+function updTimer(){ /* kept for compat — per-card timers use updTimerEl */ }
 function stopTimer(){
   if(tInt){ clearInterval(tInt); tInt=null; }
-  const c=$('coachCard'); if(c) c.classList.remove('on');
+  activeSkipFn=null;
+  // hide all inline coaches
+  document.querySelectorAll('.ex-coach.on').forEach(el=>el.classList.remove('on'));
 }
 function vib(){try{navigator.vibrate&&navigator.vibrate([80,40,80])}catch{}}
 
