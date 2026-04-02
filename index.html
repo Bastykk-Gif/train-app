@@ -19,18 +19,12 @@
   --nh:60px;--sb:env(safe-area-inset-bottom,0px);
 }
 .hero-title,.seance-title,.recap-title,.hist-title{letter-spacing:-.5px}
-.hero-title{font-size:34px!important}
-.seance-title{font-size:26px!important}
-.recap-title{font-size:36px!important}
-.hist-title{font-size:30px!important}
-.summary-val{font-size:20px!important}
-.prog-pct{font-size:18px!important}
-.kcal-big{font-size:52px!important}
-.recap-stat-val{font-size:22px!important}
-.hwt-val{font-size:26px!important}
-.hist-kcal{font-size:18px!important}
+.hero-title{font-size:34px!important}.seance-title{font-size:26px!important}
+.recap-title{font-size:36px!important}.hist-title{font-size:30px!important}
+.summary-val{font-size:20px!important}.prog-pct{font-size:18px!important}
+.kcal-big{font-size:52px!important}.recap-stat-val{font-size:22px!important}
+.hwt-val{font-size:26px!important}.hist-kcal{font-size:18px!important}
 .btn-finish,.btn-home{font-size:15px!important}
-
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 html{height:100%;background:var(--bk)}
 body{min-height:100%;background:var(--bk);color:var(--w);font-family:var(--fb);font-size:15px;line-height:1.4;-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent;touch-action:pan-y;overscroll-behavior-y:none}
@@ -43,13 +37,10 @@ body{min-height:100%;background:var(--bk);color:var(--w);font-family:var(--fb);f
 @keyframes fall{0%{transform:translateY(0) rotate(0deg);opacity:1}100%{transform:translateY(-90px) rotate(720deg);opacity:0}}
 @keyframes coachIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
 @keyframes countPop{0%{transform:scale(.5);opacity:0}50%{transform:scale(1.4)}100%{transform:scale(1);opacity:1}}
-
 /* NAV */
 .bnav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;height:calc(var(--nh) + var(--sb));background:var(--dk);border-top:1px solid var(--br);display:flex;z-index:200;padding-bottom:var(--sb)}
 .nb{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;border:none;background:none;color:var(--mt);font-family:var(--fc);font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;min-height:44px;transition:color .15s;-webkit-tap-highlight-color:transparent}
-.nb.on{color:var(--red)}
-.ni{font-size:22px;line-height:1}
-
+.nb.on{color:var(--red)}.ni{font-size:22px;line-height:1}
 /* HOME */
 .hh{background:var(--dk);padding:52px 20px 28px;position:relative;overflow:hidden}
 .hh::before{content:'TRAIN';position:absolute;right:-8px;bottom:-18px;font-family:var(--fd);font-size:120px;color:rgba(255,255,255,.03);line-height:1;pointer-events:none}
@@ -60,13 +51,11 @@ body{min-height:100%;background:var(--bk);color:var(--w);font-family:var(--fb);f
 .ss{background:var(--cd);border-radius:10px;padding:13px 10px;border:1px solid var(--br)}
 .sl{font-family:var(--fc);font-size:10px;font-weight:600;color:var(--mt);letter-spacing:.1em;text-transform:uppercase}
 .summary-val{font-family:var(--fd);color:var(--w);margin-top:4px;line-height:1}
-.summary-val.red{color:var(--red)}
-.su{font-size:10px;color:var(--mt);margin-top:2px}
+.summary-val.red{color:var(--red)}.su{font-size:10px;color:var(--mt);margin-top:2px}
 .sl2{font-family:var(--fc);font-size:11px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--mt);padding:20px 20px 10px}
 .dl{padding:0 20px;display:flex;flex-direction:column;gap:10px}
 .dc{background:var(--cd);border-radius:var(--rad);border:1px solid var(--br);display:flex;align-items:stretch;overflow:hidden;cursor:pointer;transition:border-color .2s;min-height:44px;-webkit-tap-highlight-color:transparent}
-.dc.rest{opacity:.4;pointer-events:none}
-.dc.done{border-color:rgba(232,0,26,.35)}
+.dc.rest{opacity:.4;pointer-events:none}.dc.done{border-color:rgba(232,0,26,.35)}
 .dca{width:4px;flex-shrink:0;background:var(--br);transition:background .2s}
 .dc.done .dca,.dc:active .dca{background:var(--red)}
 .dcb{flex:1;padding:14px 16px}
@@ -77,15 +66,13 @@ body{min-height:100%;background:var(--bk);color:var(--w);font-family:var(--fb);f
 .tg{font-family:var(--fc);font-size:11px;font-weight:600;background:var(--cd2);color:var(--mt2);padding:4px 9px;border-radius:5px}
 .tg.r{color:var(--red);background:var(--rdim)}
 .nb2{display:flex;align-items:center;gap:12px;background:var(--cd);border-radius:var(--rad);border:1px solid var(--br);padding:16px;cursor:pointer;margin:12px 20px 0;min-height:56px;-webkit-tap-highlight-color:transparent}
-.ni2{font-size:20px}
-.nt{flex:1}
+.ni2{font-size:20px}.nt{flex:1}
 .ntl{font-family:var(--fc);font-size:15px;font-weight:600}
 .nts{font-size:12px;color:var(--mt);margin-top:2px}
 .ntg{width:46px;height:28px;background:var(--cd2);border-radius:14px;position:relative;transition:background .2s;flex-shrink:0}
 .ntg.on{background:var(--red)}
 .nth{position:absolute;width:22px;height:22px;background:white;border-radius:50%;top:3px;left:3px;transition:transform .2s;box-shadow:0 1px 4px rgba(0,0,0,.4)}
 .ntg.on .nth{transform:translateX(18px)}
-
 /* SÉANCE */
 .stop{background:var(--dk);padding:52px 20px 0;position:relative}
 .stop::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:var(--br)}
@@ -104,7 +91,6 @@ body{min-height:100%;background:var(--bk);color:var(--w);font-family:var(--fb);f
 .sc2{padding:0 20px}
 .bh{font-family:var(--fc);font-size:11px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--mt);padding:18px 0 10px;border-top:1px solid var(--br);margin-top:6px}
 .bh:first-child{border-top:none;margin-top:0;padding-top:6px}
-
 /* EXERCISE CARD */
 .ec{background:var(--cd);border-radius:var(--rad);border:1px solid var(--br);margin-bottom:8px;overflow:hidden;transition:border-color .25s}
 .ec.dk2{border-color:rgba(232,0,26,.3);background:rgba(232,0,26,.03)}
@@ -119,58 +105,44 @@ body{min-height:100%;background:var(--bk);color:var(--w);font-family:var(--fb);f
 .ec.exp .ea{transform:rotate(90deg)}
 .eex{display:none;padding:0 14px 14px}
 .ec.exp .eex{display:block;animation:fadeUp .2s ease}
-
-/* INLINE COACH (repos timer pour muscu, cardio timer pour elliptique) */
-.ex-coach{
-  display:none;background:var(--dk);
-  border-left:3px solid var(--red);
-  padding:12px 14px;
-}
+/* INLINE COACH */
+.ex-coach{display:none;background:var(--dk);border-left:3px solid var(--red);padding:12px 14px}
 .ex-coach.on{display:flex;align-items:center;gap:12px;animation:coachIn .2s ease}
 .ex-coach-ring{position:relative;flex-shrink:0;width:72px;height:72px;display:flex;align-items:center;justify-content:center}
 .ex-coach-info{flex:1;min-width:0}
 .ex-coach-label{font-family:var(--fc);font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--red);margin-bottom:3px}
 .ex-coach-time{font-family:var(--fd);font-size:28px;color:var(--w);line-height:1}
 .ex-coach-time.urg{color:var(--red);animation:blink .5s ease infinite}
-
-/* VALIDATE BUTTON (dans chaque exercice muscu) */
-.val-btn{
-  display:none;width:100%;background:var(--red);color:white;border:none;
-  padding:14px;font-family:var(--fc);font-size:14px;font-weight:700;
-  letter-spacing:.08em;text-transform:uppercase;cursor:pointer;
-  min-height:48px;-webkit-tap-highlight-color:transparent;
-  transition:opacity .15s;
-}
-.val-btn.on{display:block}
-.val-btn:active{opacity:.8}
-.val-btn.rest-mode{background:var(--cd2);color:var(--mt2);border-top:1px solid var(--br)}
-
+/* BOUTONS DE VALIDATION */
+.btn-row{display:none;gap:0}
+.btn-row.on{display:flex}
+.val-serie{flex:1;background:var(--red);color:white;border:none;padding:14px 10px;font-family:var(--fc);font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;min-height:48px;-webkit-tap-highlight-color:transparent;transition:opacity .15s;border-right:1px solid rgba(255,255,255,0.2)}
+.val-serie:active{opacity:.8}
+.val-ex{flex:0 0 auto;background:#333;color:var(--mt2);border:none;padding:14px 12px;font-family:var(--fc);font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;cursor:pointer;min-height:48px;-webkit-tap-highlight-color:transparent;transition:opacity .15s;white-space:nowrap}
+.val-ex:active{opacity:.8}
 /* VIDEO */
 .vp{margin-bottom:12px;border-radius:10px;overflow:hidden;background:var(--cd2);position:relative}
 .vp video{width:100%;display:block;height:170px;object-fit:cover;background:var(--cd2)}
 .vc{position:absolute;bottom:6px;right:8px;font-family:var(--fc);font-size:9px;font-weight:600;letter-spacing:.1em;color:rgba(255,255,255,.4);text-transform:uppercase}
 .mtags{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:10px}
 .mt3{font-family:var(--fc);font-size:11px;font-weight:600;padding:3px 8px;border-radius:5px}
-.mt3.p{background:var(--rdim);color:var(--red)}
-.mt3.s{background:var(--cd2);color:var(--mt2)}
+.mt3.p{background:var(--rdim);color:var(--red)}.mt3.s{background:var(--cd2);color:var(--mt2)}
 .egrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(68px,1fr));gap:8px;margin-bottom:10px}
 .ebox{background:var(--cd2);border-radius:10px;padding:10px 8px;text-align:center}
 .ebl{font-family:var(--fc);font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--mt)}
 .ebv{font-family:var(--fd);font-size:18px;color:var(--w);margin-top:3px;line-height:1}
 .enote{font-size:12px;color:var(--mt2);font-style:italic;margin-top:6px;line-height:1.4}
-
 /* ELLIPTIQUE STEPS */
 .esteps{background:var(--cd2);border-radius:10px;padding:10px;margin-top:8px}
 .esteps-title{font-family:var(--fc);font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--mt);margin-bottom:8px}
-.estep{display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px solid var(--br);border-radius:4px;transition:background .2s}
+.estep{display:flex;align-items:center;gap:8px;padding:5px 4px;border-bottom:1px solid var(--br);border-radius:4px;transition:background .2s}
 .estep:last-child{border-bottom:none}
-.estep-min{font-family:var(--fc);font-size:11px;color:var(--mt);width:44px;flex-shrink:0}
+.estep-min{font-family:var(--fc);font-size:10px;color:var(--mt);width:80px;flex-shrink:0}
 .estep-bar{flex:1;height:6px;background:var(--cd);border-radius:3px;overflow:hidden}
 .estep-fill{height:100%;border-radius:3px;background:var(--red)}
-.estep-f{font-family:var(--fd);font-size:14px;color:var(--red);width:24px;text-align:right;flex-shrink:0}
-.estep.cur{background:rgba(232,0,26,0.15);padding-left:4px;padding-right:4px;border-radius:6px}
-
-/* CARDIO CARD */
+.estep-f{font-family:var(--fd);font-size:13px;color:var(--red);width:60px;text-align:right;flex-shrink:0;white-space:nowrap}
+.estep.cur{background:rgba(232,0,26,0.15);border-radius:6px}
+/* CARDIO */
 .cc{background:var(--cd);border-radius:var(--rad);border:1px solid var(--br);margin-bottom:8px;overflow:hidden;transition:border-color .25s}
 .cc.dk2{border-color:rgba(232,0,26,.3);background:rgba(232,0,26,.03)}
 .cm{display:flex;justify-content:space-between;align-items:center;padding:14px;min-height:52px}
@@ -179,20 +151,10 @@ body{min-height:100%;background:var(--bk);color:var(--w);font-family:var(--fb);f
 .cp{font-size:12px;color:var(--mt);padding:0 14px 12px;line-height:1.5}
 .cck{width:36px;height:36px;min-width:36px;min-height:36px;border-radius:50%;flex-shrink:0;border:2px solid var(--mt);display:flex;align-items:center;justify-content:center;cursor:pointer;background:none;color:transparent;font-size:16px;font-weight:700;transition:background .2s,border-color .2s;-webkit-tap-highlight-color:transparent}
 .cck.on{background:var(--red);border-color:var(--red);color:white;animation:chkPop .25s ease}
-
-/* HIIT STEPS TABLE */
-.ht2{width:100%;border-collapse:collapse;margin:0 0 4px;font-size:13px}
-.ht2 td{padding:8px 14px;border-bottom:1px solid var(--br)}
-.ht2 td:first-child{font-family:var(--fc);font-weight:600;color:var(--mt2)}
-.ht2 tr:last-child td{border-bottom:none}
-.he{color:var(--red)!important}
-
 /* FINISH */
 .fw{padding:18px 20px 0}
 .btn-finish{width:100%;background:var(--red);color:white;border:none;border-radius:var(--rad);padding:18px;font-family:var(--fd);letter-spacing:1px;cursor:pointer;min-height:56px;-webkit-tap-highlight-color:transparent;transition:opacity .15s}
-.btn-finish:disabled{opacity:.25}
-.btn-finish:not(:disabled):active{opacity:.8}
-
+.btn-finish:disabled{opacity:.25}.btn-finish:not(:disabled):active{opacity:.8}
 /* RECAP */
 .rh{background:var(--red);padding:56px 20px 32px;position:relative;overflow:hidden}
 .rh::before{content:'GG';position:absolute;right:-8px;top:-18px;font-family:var(--fd);font-size:150px;color:rgba(0,0,0,.15);pointer-events:none;line-height:1}
@@ -212,12 +174,10 @@ body{min-height:100%;background:var(--bk);color:var(--w);font-family:var(--fb);f
 .wkl{font-family:var(--fc);font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--mt);margin-bottom:12px}
 .wkb{display:flex;gap:4px;align-items:flex-end;height:50px}
 .wb{flex:1;border-radius:3px 3px 0 0;background:var(--cd2);min-height:4px;transition:background .3s}
-.wb.td{background:var(--red)}
-.wb.dn{background:rgba(232,0,26,.4)}
+.wb.td{background:var(--red)}.wb.dn{background:rgba(232,0,26,.4)}
 .wdl{display:flex;gap:4px;margin-top:5px}
 .wdl2{flex:1;text-align:center;font-family:var(--fc);font-size:9px;font-weight:600;color:var(--mt);letter-spacing:.06em;text-transform:uppercase}
 .btn-home{display:block;margin:12px 20px 0;background:var(--cd);color:var(--w);border:1px solid var(--br);border-radius:var(--rad);padding:16px;width:calc(100% - 40px);font-family:var(--fd);letter-spacing:.5px;cursor:pointer;text-align:center;min-height:52px;-webkit-tap-highlight-color:transparent}
-
 /* HISTORIQUE */
 .hih{background:var(--dk);padding:52px 20px 22px}
 .hist-title{font-family:var(--fd);letter-spacing:.5px}
@@ -238,7 +198,6 @@ body{min-height:100%;background:var(--bk);color:var(--w);font-family:var(--fb);f
 .hiempt{font-size:14px;color:var(--mt);line-height:1.5}
 .hicl{margin:14px 20px 0;background:none;border:1px solid var(--br);border-radius:var(--rad);padding:14px;width:calc(100% - 40px);font-family:var(--fc);font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--mt);cursor:pointer;min-height:48px;-webkit-tap-highlight-color:transparent}
 .cfp{position:fixed;width:8px;height:8px;border-radius:2px;pointer-events:none;z-index:999;animation:fall 1.2s ease-out forwards}
-
 /* COUNTDOWN OVERLAY */
 .cto{position:fixed;inset:0;background:rgba(10,10,10,.93);display:none;flex-direction:column;align-items:center;justify-content:center;z-index:500}
 .cto.on{display:flex}
@@ -249,7 +208,6 @@ body{min-height:100%;background:var(--bk);color:var(--w);font-family:var(--fb);f
 </head>
 <body>
 <div id="app">
-
 <div id="home" class="screen active">
   <div class="hh">
     <div class="ht">Programme · Mois 1</div>
@@ -269,7 +227,6 @@ body{min-height:100%;background:var(--bk);color:var(--w);font-family:var(--fb);f
     <div class="ntg" id="notifToggle"><div class="nth"></div></div>
   </div>
 </div>
-
 <div id="seance" class="screen">
   <div class="stop">
     <button class="bbtn" id="backBtn">← Retour</button>
@@ -284,7 +241,6 @@ body{min-height:100%;background:var(--bk);color:var(--w);font-family:var(--fb);f
   <div class="sc2" id="seanceContent"></div>
   <div class="fw"><button class="btn-finish" id="btnFinish" disabled>TERMINER LA SÉANCE</button></div>
 </div>
-
 <div id="recap" class="screen">
   <div class="rh"><div class="recap-title">SÉANCE<br>TERMINÉE</div><div class="rsub" id="recapSub"></div></div>
   <div class="rkw"><div class="rkc"><div class="kcal-big" id="recapKcal">—</div><div><div class="ku">kcal</div><div class="kd">brûlées aujourd'hui</div></div></div></div>
@@ -296,7 +252,6 @@ body{min-height:100%;background:var(--bk);color:var(--w);font-family:var(--fb);f
   </div>
   <button class="btn-home" id="btnHome">RETOUR À L'ACCUEIL</button>
 </div>
-
 <div id="historique" class="screen">
   <div class="hih"><div class="hist-title">HISTORIQUE</div><div class="hisub">Toutes tes séances enregistrées</div></div>
   <div class="hwt">
@@ -305,18 +260,15 @@ body{min-height:100%;background:var(--bk);color:var(--w);font-family:var(--fb);f
   </div>
   <div id="histContent"></div>
 </div>
-
 <div class="cto" id="cto">
   <div class="cto-label" id="ctoLabel">Prépare-toi</div>
   <div class="cto-num" id="ctoNum">3</div>
 </div>
-
 <nav class="bnav">
   <button class="nb on" id="nav-home"><div class="ni">⊞</div>Programme</button>
   <button class="nb" id="nav-historique"><div class="ni">◎</div>Historique</button>
 </nav>
 </div>
-
 <script>
 const MOIS=1;
 const BASE='https://media.musclewiki.com/media/uploads/videos/branded/';
@@ -355,59 +307,64 @@ const MUSCLES={
   elliptique: {p:['Cardio complet','Jambes'],s:['Fessiers','Bras']}
 };
 
-// ── ELLIPTIQUE STEP PROGRESSIONS ──
-// Poids vérifiés : 4×5kg + 4×2kg + 6×1kg
-// Chaque step: {min, f (force/15), durS (secondes)}
+// ── ELLIPTIQUE STEPS ──
+// Poids 2 haltères : 1,2,3,4,5,6,7,9,11,12,13,14,15,16,17 kg
+// Poids 1 haltère  : 1..28 kg
 const ELLIPSTEPS={
-  warmup:[   // 5 min, +1 force/min, départ 11
-    {min:'Min 1',f:11,durS:60},{min:'Min 2',f:12,durS:60},
-    {min:'Min 3',f:13,durS:60},{min:'Min 4',f:14,durS:60},{min:'Min 5',f:15,durS:60}
+  warmup:[
+    {min:'Min 1 · 50-53 tr/min',f:11,durS:60},{min:'Min 2 · 50-53 tr/min',f:12,durS:60},
+    {min:'Min 3 · 50-53 tr/min',f:13,durS:60},{min:'Min 4 · 50-53 tr/min',f:14,durS:60},
+    {min:'Min 5 · 50-53 tr/min',f:15,durS:60}
   ],
-  warmup2:[  // 5 min, +1 force/min, départ 10
-    {min:'Min 1',f:10,durS:60},{min:'Min 2',f:11,durS:60},
-    {min:'Min 3',f:12,durS:60},{min:'Min 4',f:13,durS:60},{min:'Min 5',f:14,durS:60}
+  warmup2:[
+    {min:'Min 1 · 50-53 tr/min',f:10,durS:60},{min:'Min 2 · 50-53 tr/min',f:11,durS:60},
+    {min:'Min 3 · 50-53 tr/min',f:12,durS:60},{min:'Min 4 · 50-53 tr/min',f:13,durS:60},
+    {min:'Min 5 · 50-53 tr/min',f:14,durS:60}
   ],
-  cardio20:[ // 20 min, +1 force/2min, départ 6
-    {min:'Min 1-2',f:6,durS:120},{min:'Min 3-4',f:7,durS:120},{min:'Min 5-6',f:8,durS:120},
-    {min:'Min 7-8',f:9,durS:120},{min:'Min 9-10',f:10,durS:120},{min:'Min 11-12',f:11,durS:120},
-    {min:'Min 13-14',f:12,durS:120},{min:'Min 15-16',f:13,durS:120},
-    {min:'Min 17-18',f:14,durS:120},{min:'Min 19-20',f:15,durS:120}
+  cardio20:[
+    {min:'Min 1-2 · 50-53 tr/min',f:6,durS:120},{min:'Min 3-4 · 50-53 tr/min',f:7,durS:120},
+    {min:'Min 5-6 · 50-53 tr/min',f:8,durS:120},{min:'Min 7-8 · 50-53 tr/min',f:9,durS:120},
+    {min:'Min 9-10 · 50-53 tr/min',f:10,durS:120},{min:'Min 11-12 · 50-53 tr/min',f:11,durS:120},
+    {min:'Min 13-14 · 50-53 tr/min',f:12,durS:120},{min:'Min 15-16 · 50-53 tr/min',f:13,durS:120},
+    {min:'Min 17-18 · 50-53 tr/min',f:14,durS:120},{min:'Min 19-20 · 50-53 tr/min',f:15,durS:120}
   ],
-  cardio15:[ // 15 min, +1 force/2min, départ 6
-    {min:'Min 1-2',f:6,durS:120},{min:'Min 3-4',f:7,durS:120},{min:'Min 5-6',f:8,durS:120},
-    {min:'Min 7-8',f:9,durS:120},{min:'Min 9-10',f:10,durS:120},{min:'Min 11-12',f:11,durS:120},
-    {min:'Min 13-14',f:12,durS:120},{min:'Min 15',f:13,durS:60}
+  cardio15:[
+    {min:'Min 1-2 · 50-53 tr/min',f:6,durS:120},{min:'Min 3-4 · 50-53 tr/min',f:7,durS:120},
+    {min:'Min 5-6 · 50-53 tr/min',f:8,durS:120},{min:'Min 7-8 · 50-53 tr/min',f:9,durS:120},
+    {min:'Min 9-10 · 50-53 tr/min',f:10,durS:120},{min:'Min 11-12 · 50-53 tr/min',f:11,durS:120},
+    {min:'Min 13-14 · 50-53 tr/min',f:12,durS:120},{min:'Min 15 · 50-53 tr/min',f:13,durS:60}
   ],
-  cardio45:[ // 45 min, +1 force/5min, départ 6
-    {min:'Min 1-5',f:6,durS:300},{min:'Min 6-10',f:7,durS:300},{min:'Min 11-15',f:8,durS:300},
-    {min:'Min 16-20',f:9,durS:300},{min:'Min 21-25',f:10,durS:300},{min:'Min 26-30',f:11,durS:300},
-    {min:'Min 31-35',f:12,durS:300},{min:'Min 36-40',f:13,durS:300},{min:'Min 41-45',f:14,durS:300}
+  cardio45:[
+    {min:'Min 1-5 · 50-53 tr/min',f:6,durS:300},{min:'Min 6-10 · 50-53 tr/min',f:7,durS:300},
+    {min:'Min 11-15 · 50-53 tr/min',f:8,durS:300},{min:'Min 16-20 · 50-53 tr/min',f:9,durS:300},
+    {min:'Min 21-25 · 50-53 tr/min',f:10,durS:300},{min:'Min 26-30 · 50-53 tr/min',f:11,durS:300},
+    {min:'Min 31-35 · 50-53 tr/min',f:12,durS:300},{min:'Min 36-40 · 50-53 tr/min',f:13,durS:300},
+    {min:'Min 41-45 · 50-53 tr/min',f:14,durS:300}
   ],
-  // HIIT vendredi : 6 rounds × (2min F10 + 1min F15)
   hiit6:[
-    {min:'Round 1 · 2min',f:10,durS:120,label:'Modéré'},
-    {min:'Round 1 · 1min',f:15,durS:60,label:'SPRINT'},
-    {min:'Round 2 · 2min',f:10,durS:120,label:'Modéré'},
-    {min:'Round 2 · 1min',f:15,durS:60,label:'SPRINT'},
-    {min:'Round 3 · 2min',f:10,durS:120,label:'Modéré'},
-    {min:'Round 3 · 1min',f:15,durS:60,label:'SPRINT'},
-    {min:'Round 4 · 2min',f:10,durS:120,label:'Modéré'},
-    {min:'Round 4 · 1min',f:15,durS:60,label:'SPRINT'},
-    {min:'Round 5 · 2min',f:10,durS:120,label:'Modéré'},
-    {min:'Round 5 · 1min',f:15,durS:60,label:'SPRINT'},
-    {min:'Round 6 · 2min',f:10,durS:120,label:'Modéré'},
-    {min:'Round 6 · 1min',f:15,durS:60,label:'SPRINT'},
+    {min:'R1 · 2min modéré',f:10,durS:120,rpm:'50-53 tr/min'},
+    {min:'R1 · 1min SPRINT',f:15,durS:60,rpm:'60-70 tr/min',label:'SPRINT'},
+    {min:'R2 · 2min modéré',f:10,durS:120,rpm:'50-53 tr/min'},
+    {min:'R2 · 1min SPRINT',f:15,durS:60,rpm:'60-70 tr/min',label:'SPRINT'},
+    {min:'R3 · 2min modéré',f:10,durS:120,rpm:'50-53 tr/min'},
+    {min:'R3 · 1min SPRINT',f:15,durS:60,rpm:'60-70 tr/min',label:'SPRINT'},
+    {min:'R4 · 2min modéré',f:10,durS:120,rpm:'50-53 tr/min'},
+    {min:'R4 · 1min SPRINT',f:15,durS:60,rpm:'60-70 tr/min',label:'SPRINT'},
+    {min:'R5 · 2min modéré',f:10,durS:120,rpm:'50-53 tr/min'},
+    {min:'R5 · 1min SPRINT',f:15,durS:60,rpm:'60-70 tr/min',label:'SPRINT'},
+    {min:'R6 · 2min modéré',f:10,durS:120,rpm:'50-53 tr/min'},
+    {min:'R6 · 1min SPRINT',f:15,durS:60,rpm:'60-70 tr/min',label:'SPRINT'}
   ]
 };
 
-function stepsHTML(steps){
+function stepsHTML(steps,cardId){
   const max=Math.max(...steps.map(s=>s.f));
   return `<div class="esteps">
-    <div class="esteps-title">Progression force — écoute les annonces vocales</div>
-    ${steps.map((s,i)=>`<div class="estep" id="step-${i}-CARDID">
+    <div class="esteps-title">Progression — les annonces vocales te guident</div>
+    ${steps.map((s,i)=>`<div class="estep" id="step-${i}-${cardId}">
       <span class="estep-min">${s.min}</span>
       <div class="estep-bar"><div class="estep-fill" style="width:${Math.round(s.f/max*100)}%"></div></div>
-      <span class="estep-f">${s.f}${s.label?' — '+s.label:''}</span>
+      <span class="estep-f">F${s.f}${s.rpm?' · '+s.rpm:''}</span>
     </div>`).join('')}
   </div>`;
 }
@@ -422,125 +379,88 @@ function vidPanel(key){
   return vb+`<div class="mtags">${pt}${st}</div>`;
 }
 
-// ══════════════════════════════════════════
-// PROGRAMME V9
-// Poids disponibles : 4×5kg + 4×2kg + 6×1kg
-// Max haltère : 5+5+2+2+1+1 = 16 kg
-// Charges vérifiées : toutes atteignables
-// ══════════════════════════════════════════
+// ══════════════════════════════════
+// PROGRAMME V10
+// 2 haltères : 1,2,3,4,5,6,7,9,11,12,13,14,15,16,17 kg
+// 1 haltère  : 1–28 kg
+// ══════════════════════════════════
 const P={
   lundi:{nom:'Full Body + Cardio',duree:'55 min',kcal:420,blocks:[
     {title:'Échauffement · 5 min',items:[
-      {t:'c',nom:'Elliptique — montée progressive',params:'Force 11→15 · augmenter de 1 chaque minute',
-       steps:'warmup',kcal:35,vk:'elliptique',durS:300}
+      {t:'c',nom:'Elliptique — montée progressive',params:'Force 11→15 · +1/min · 50-53 tr/min',steps:'warmup',kcal:35,vk:'elliptique',durS:300}
     ]},
     {title:'Musculation · ~30 min — 40s repos entre séries',items:[
-      {t:'e',nom:'Goblet Squat',series:4,reps:12,charges:[15,16,16],unite:'kg',timer:40,vk:'gobletSquat',
-       note:'Cuisses parallèles sol · talons bien posés'},
-      {t:'e',nom:'Développé couché',series:4,reps:10,charges:['2×14','2×15','2×16'],unite:'kg',timer:40,vk:'benchPress',
-       note:'Descente lente 2 sec · coudes à 45°'},
-      {t:'e',nom:'Rowing 1 bras',series:4,reps:'10/côté',charges:[14,15,16],unite:'kg',timer:40,vk:'rowing',
-       note:'Coude haut · pause 1 sec en haut'},
-      {t:'e',nom:'Superman',series:3,reps:15,charges:[null,null,null],timer:40,vk:'superman',
-       note:'Au sol · lever bras et jambes simultanément · 2 sec en haut · pas de haltères'},
-      {t:'e',nom:'Gainage frontal',series:3,reps:'45 sec',charges:[null,null,null],timer:30,ig:true,vk:'gainage',
-       note:'Corps rigide tête-talons · serrer le ventre'},
+      {t:'e',nom:'Goblet Squat',series:4,reps:12,charges:[15,16,16],unite:'kg',timer:40,vk:'gobletSquat',note:'Cuisses parallèles sol · talons bien posés'},
+      {t:'e',nom:'Développé couché',series:4,reps:10,charges:['2×14','2×15','2×16'],unite:'kg',timer:40,vk:'benchPress',note:'Descente lente 2 sec · coudes à 45°'},
+      {t:'e',nom:'Rowing 1 bras',series:4,reps:'10/côté',charges:[14,15,16],unite:'kg',timer:40,vk:'rowing',note:'Coude haut · pause 1 sec en haut'},
+      {t:'e',nom:'Superman',series:3,reps:15,charges:[null,null,null],timer:40,vk:'superman',note:'Au sol · lever bras et jambes · hold 2 sec · pas de haltères'},
+      {t:'e',nom:'Gainage frontal',series:3,reps:'45 sec',charges:[null,null,null],timer:30,ig:true,vk:'gainage',note:'Corps rigide tête-talons · serrer le ventre'},
     ]},
     {title:'Cardio · 20 min',items:[
-      {t:'c',nom:'Elliptique Zone 2 — progression',params:'Force 6→15 · augmenter de 1 toutes les 2 min',
-       steps:'cardio20',kcal:185,vk:'elliptique',durS:1200}
+      {t:'c',nom:'Elliptique Zone 2 — progression',params:'Force 6→15 · +1/2min · 50-53 tr/min',steps:'cardio20',kcal:185,vk:'elliptique',durS:1200}
     ]}
   ]},
-
   mardi:{nom:'Cardio Zone 2 pur',duree:'45 min',kcal:430,blocks:[
     {title:'Cardio · 45 min',items:[
-      {t:'c',nom:'Elliptique Zone 2 — progression',params:'Force 6→14 · augmenter de 1 toutes les 5 min',
-       steps:'cardio45',kcal:430,vk:'elliptique',durS:2700}
+      {t:'c',nom:'Elliptique Zone 2 — progression',params:'Force 6→14 · +1/5min · 50-53 tr/min',steps:'cardio45',kcal:430,vk:'elliptique',durS:2700}
     ]}
   ]},
-
   mercredi:{nom:'Haut du corps + Cardio',duree:'55 min',kcal:390,blocks:[
     {title:'Échauffement · 5 min',items:[
-      {t:'c',nom:'Elliptique — montée progressive',params:'Force 10→14 · augmenter de 1 chaque minute',
-       steps:'warmup2',kcal:30,vk:'elliptique',durS:300}
+      {t:'c',nom:'Elliptique — montée progressive',params:'Force 10→14 · +1/min · 50-53 tr/min',steps:'warmup2',kcal:30,vk:'elliptique',durS:300}
     ]},
     {title:'Musculation · ~30 min',items:[
-      {t:'e',nom:'Développé épaules',series:4,reps:10,charges:['2×6','2×8','2×10'],unite:'kg',timer:40,vk:'shoulderP',
-       note:'Dos plat contre dossier · ne pas hyperétendre'},
-      {t:'e',nom:'Rowing 1 bras',series:4,reps:'10/côté',charges:[14,15,16],unite:'kg',timer:40,vk:'rowing',
-       note:'Coude haut · pause 1 sec en haut'},
-      {t:'e',nom:'Curl + Press combo',series:3,reps:12,charges:['2×8','2×10','2×11'],unite:'kg',timer:40,vk:'curl',
-       note:'Curl → press enchaîné sans poser · 2×11 = 2×(5+5+1)'},
-      {t:'e',nom:'Gainage latéral',series:3,reps:'45 sec/côté',charges:[null,null,null],timer:30,ig:true,vk:'gainageLat',
-       note:'Hanche haute · ne pas laisser tomber le bassin'},
-      {t:'e',nom:'Rowing penché 2 bras',series:4,reps:10,charges:['2×12','2×14','2×16'],unite:'kg',timer:40,vk:'rowingB',
-       note:'Torse à 45° dos plat · tirer les coudes vers le plafond'},
-      {t:'e',nom:'Crunch',series:3,reps:20,charges:[null,null,null],timer:40,vk:'crunch',
-       note:'Au sol · mains derrière la nuque · exhaler en montant · pas de haltères'},
+      {t:'e',nom:'Développé épaules',series:4,reps:10,charges:['2×6','2×8','2×10'],unite:'kg',timer:40,vk:'shoulderP',note:'Dos plat contre dossier · ne pas hyperétendre'},
+      {t:'e',nom:'Rowing 1 bras',series:4,reps:'10/côté',charges:[14,15,16],unite:'kg',timer:40,vk:'rowing',note:'Coude haut · pause 1 sec en haut'},
+      {t:'e',nom:'Curl + Press combo',series:3,reps:12,charges:['2×8','2×10','2×12'],unite:'kg',timer:40,vk:'curl',note:'Curl → press enchaîné sans poser · 2×12 = barre + 5+5+1'},
+      {t:'e',nom:'Gainage latéral',series:3,reps:'45 sec/côté',charges:[null,null,null],timer:30,ig:true,vk:'gainageLat',note:'Hanche haute · ne pas laisser tomber le bassin'},
+      {t:'e',nom:'Rowing penché 2 bras',series:4,reps:10,charges:['2×12','2×14','2×16'],unite:'kg',timer:40,vk:'rowingB',note:'Torse 45° dos plat · coudes vers le plafond'},
+      {t:'e',nom:'Crunch',series:3,reps:20,charges:[null,null,null],timer:40,vk:'crunch',note:'Mains derrière la nuque · exhaler en montant'},
     ]},
     {title:'Cardio · 15 min',items:[
-      {t:'c',nom:'Elliptique Zone 2 — progression',params:'Force 6→13 · augmenter de 1 toutes les 2 min',
-       steps:'cardio15',kcal:130,vk:'elliptique',durS:900}
+      {t:'c',nom:'Elliptique Zone 2 — progression',params:'Force 6→13 · +1/2min · 50-53 tr/min',steps:'cardio15',kcal:130,vk:'elliptique',durS:900}
     ]}
   ]},
-
   jeudi:{nom:'Bas du corps + Cardio',duree:'55 min',kcal:440,blocks:[
     {title:'Échauffement · 5 min',items:[
-      {t:'c',nom:'Elliptique — montée progressive',params:'Force 10→14 · augmenter de 1 chaque minute',
-       steps:'warmup2',kcal:30,vk:'elliptique',durS:300}
+      {t:'c',nom:'Elliptique — montée progressive',params:'Force 10→14 · +1/min · 50-53 tr/min',steps:'warmup2',kcal:30,vk:'elliptique',durS:300}
     ]},
     {title:'Musculation · ~30 min',items:[
-      {t:'e',nom:'Squat goblet',series:4,reps:12,charges:[15,16,16],unite:'kg',timer:40,vk:'gobletSquat',
-       note:'Cuisses parallèles sol · talons bien posés'},
-      {t:'e',nom:'Fentes alternées',series:4,reps:'10/jambe',charges:['2×8','2×10','2×12'],unite:'kg',timer:40,vk:'fentes',
-       note:'Genou avant ne dépasse pas la pointe du pied'},
-      {t:'e',nom:'Soulevé de terre',series:4,reps:10,charges:['2×14','2×15','2×16'],unite:'kg',timer:40,vk:'souleve',
-       note:'Dos plat · hanches en arrière · contrôle à la descente'},
-      {t:'e',nom:'Hip thrust au sol',series:4,reps:15,charges:[10,12,14],unite:'kg',timer:40,vk:'hipFloor',
-       note:'1 seul haltère posé sur le bassin · dos au sol · serrer les fessiers en haut 1 sec'},
-      {t:'e',nom:'Superman',series:3,reps:15,charges:[null,null,null],timer:40,vk:'superman',
-       note:'Au sol · lever bras et jambes · hold 2 sec · pas de haltères'},
+      {t:'e',nom:'Squat goblet',series:4,reps:12,charges:[15,16,16],unite:'kg',timer:40,vk:'gobletSquat',note:'Cuisses parallèles sol · talons bien posés'},
+      {t:'e',nom:'Fentes alternées',series:4,reps:'10/jambe',charges:['2×8','2×10','2×12'],unite:'kg',timer:40,vk:'fentes',note:'Genou avant ne dépasse pas la pointe du pied'},
+      {t:'e',nom:'Soulevé de terre',series:4,reps:10,charges:['2×14','2×15','2×16'],unite:'kg',timer:40,vk:'souleve',note:'Dos plat · hanches en arrière · contrôle à la descente'},
+      {t:'e',nom:'Hip thrust au sol',series:4,reps:15,charges:[10,12,14],unite:'kg',timer:40,vk:'hipFloor',note:'1 haltère sur le bassin · dos au sol · fessiers contractés 1 sec en haut'},
+      {t:'e',nom:'Superman',series:3,reps:15,charges:[null,null,null],timer:40,vk:'superman',note:'Au sol · lever bras et jambes · hold 2 sec · pas de haltères'},
     ]},
     {title:'Cardio · 15 min',items:[
-      {t:'c',nom:'Elliptique Zone 2 — progression',params:'Force 6→13 · augmenter de 1 toutes les 2 min',
-       steps:'cardio15',kcal:130,vk:'elliptique',durS:900}
+      {t:'c',nom:'Elliptique Zone 2 — progression',params:'Force 6→13 · +1/2min · 50-53 tr/min',steps:'cardio15',kcal:130,vk:'elliptique',durS:900}
     ]}
   ]},
-
   vendredi:{nom:'Circuit Full Body + HIIT',duree:'55 min',kcal:480,blocks:[
     {title:'Échauffement · 5 min',items:[
-      {t:'c',nom:'Elliptique — montée progressive',params:'Force 11→15 · augmenter de 1 chaque minute',
-       steps:'warmup',kcal:35,vk:'elliptique',durS:300}
+      {t:'c',nom:'Elliptique — montée progressive',params:'Force 11→15 · +1/min · 50-53 tr/min',steps:'warmup',kcal:35,vk:'elliptique',durS:300}
     ]},
     {title:'Circuit · 4 tours — 30s repos · 2 min entre tours',items:[
-      {t:'e',nom:'Squat goblet',series:4,reps:15,charges:[15,16,16],unite:'kg',timer:30,vk:'gobletSquat',
-       note:'Cuisses parallèles sol'},
-      {t:'e',nom:'Pompes',series:4,reps:12,charges:[null,null,null],timer:30,vk:'pompes',
-       note:'Mains légèrement plus larges que les épaules · corps gainé'},
-      {t:'e',nom:'Rowing 1 bras',series:4,reps:'10/côté',charges:[14,15,16],unite:'kg',timer:30,vk:'rowing',
-       note:'Coude haut'},
-      {t:'e',nom:'Fentes',series:4,reps:'10/jambe',charges:['2×8','2×10','2×12'],unite:'kg',timer:30,vk:'fentes',
-       note:'Genou avant ne dépasse pas la pointe du pied'},
+      {t:'e',nom:'Squat goblet',series:4,reps:15,charges:[15,16,16],unite:'kg',timer:30,vk:'gobletSquat',note:'Cuisses parallèles sol'},
+      {t:'e',nom:'Pompes',series:4,reps:12,charges:[null,null,null],timer:30,vk:'pompes',note:'Mains légèrement plus larges que les épaules · corps gainé'},
+      {t:'e',nom:'Rowing 1 bras',series:4,reps:'10/côté',charges:[14,15,16],unite:'kg',timer:30,vk:'rowing',note:'Coude haut'},
+      {t:'e',nom:'Fentes',series:4,reps:'10/jambe',charges:['2×8','2×10','2×12'],unite:'kg',timer:30,vk:'fentes',note:'Genou avant ne dépasse pas la pointe du pied'},
       {t:'e',nom:'Gainage',series:4,reps:'45 sec',charges:[null,null,null],timer:30,ig:true,vk:'gainage'},
     ]},
     {title:'HIIT Elliptique · 18 min — 6 rounds',items:[
-      {t:'c',nom:'HIIT Elliptique — 6 rounds × (2min F10 + 1min F15)',
-       params:'50 tr/min force 10 · puis 70 tr/min force 15 · répété 6 fois · ~230 kcal',
+      {t:'c',nom:'HIIT — 6 × (2min F10 modéré + 1min F15 sprint)',
+       params:'Modéré : Force 10 · 50-53 tr/min  |  Sprint : Force 15 · 60-70 tr/min  |  ~230 kcal',
        steps:'hiit6',kcal:230,vk:'elliptique',durS:1080}
     ]}
   ]}
 };
 
 const JOURS=[
-  {key:'lundi',label:'Lundi'},
-  {key:'mardi',label:'Mardi'},
-  {key:'mercredi',label:'Mercredi'},
-  {key:'jeudi',label:'Jeudi'},
-  {key:'vendredi',label:'Vendredi'},
+  {key:'lundi',label:'Lundi'},{key:'mardi',label:'Mardi'},{key:'mercredi',label:'Mercredi'},
+  {key:'jeudi',label:'Jeudi'},{key:'vendredi',label:'Vendredi'},
   {key:'weekend',label:'Sam / Dim',rest:true,kcal:300,nom:'Repos actif — 10 000 pas minimum',duree:'—'}
 ];
 
-// ── STATE ──
 let curDay=null,doneSet=new Set(),total=0;
 let tInt=null,tSec=0,tTot=0,notifOn=false;
 const $=id=>document.getElementById(id);
@@ -551,24 +471,20 @@ const monStart=()=>{const n=new Date(),m=new Date(n);m.setDate(n.getDate()-((n.g
 const weekKcal=()=>getH().filter(e=>new Date(e.ts)>=monStart()).reduce((s,e)=>s+e.kcal,0);
 const weekSess=()=>getH().filter(e=>new Date(e.ts)>=monStart()).length;
 const dayDone=k=>getH().some(e=>e.key===k&&new Date(e.ts)>=monStart());
-
 const CIRC=276.46;
 
-// ── SPEECH ──
 function speak(txt){
   if(!('speechSynthesis' in window)) return;
   try{
     window.speechSynthesis.cancel();
     const u=new SpeechSynthesisUtterance(txt);
     u.lang='fr-FR'; u.rate=1.05; u.volume=1;
-    const voices=window.speechSynthesis.getVoices();
-    const fr=voices.find(v=>v.lang.startsWith('fr'));
+    const fr=window.speechSynthesis.getVoices().find(v=>v.lang.startsWith('fr'));
     if(fr) u.voice=fr;
     window.speechSynthesis.speak(u);
   }catch(e){}
 }
 
-// ── RING SVG HELPERS ──
 function ringHTML(id){
   const RC=CIRC.toFixed(1);
   return `<svg viewBox="0 0 100 100" width="72" height="72" style="transform:rotate(-90deg);display:block">
@@ -588,7 +504,9 @@ function updTimerEl(elId,sec){
   el.className='ex-coach-time'+(sec<=5?' urg':'');
 }
 
-// ── COUNTDOWN 3-2-1 (single countdown) ──
+// ── COUNTDOWN 3-2-1 ──
+// Fix chevauche : pas d'annonce 3,2,1 à la fin du repos — le countdown n'est
+// déclenché QUE au début d'une série (pas en fin de pause)
 function countdown321(label,onGo){
   const cto=$('cto'),ctoL=$('ctoLabel'),ctoN=$('ctoNum');
   ctoL.textContent=label||'Prépare-toi';
@@ -609,8 +527,10 @@ function countdown321(label,onGo){
   },1000);
 }
 
-// ── REPOS TIMER (after each serie) ──
-function startRepos(secs, ringId, labelId, timeId, coachEl, onDone){
+// ── REPOS TIMER ──
+// FIX double countdown : à la fin du repos, on appelle directement showSerie()
+// SANS passer par countdown321. Le 3-2-1 n'a lieu qu'UNE fois : au tap initial.
+function startRepos(secs,ringId,labelId,timeId,coachEl,onDone){
   stopTimer();
   tTot=secs; tSec=secs;
   coachEl.classList.add('on');
@@ -626,6 +546,7 @@ function startRepos(secs, ringId, labelId, timeId, coachEl, onDone){
     if(tSec===3) speak('Trois');
     if(tSec===2) speak('Deux');
     if(tSec===1) speak('Un');
+    // Fin de repos : on appelle directement onDone (= showSerie), PAS countdown321
     if(tSec<=0){ clearInterval(tInt); tInt=null; if(onDone) onDone(); }
   },1000);
 }
@@ -635,31 +556,35 @@ function startElliptiqueTimer(item,cardEl,chkEl){
   if(chkEl.classList.contains('on')){
     chkEl.classList.remove('on'); chkEl.textContent='';
     cardEl.classList.remove('dk2'); doneSet.delete('ell-'+item.nom);
-    stopTimer(); updateProg(); allDone();
-    return;
+    stopTimer(); updateProg(); allDone(); return;
   }
   const cardId=cardEl.id.replace('card-','');
-  const ringId='ring-'+cardId;
-  const labelId='clabel-'+cardId;
+  const ringId='ring-'+cardId, labelId='clabel-'+cardId;
   const timeId='ctime-'+cardId;
   const coachEl=cardEl.querySelector('.ex-coach');
   const steps=item.steps?ELLIPSTEPS[item.steps]:null;
   const totalSecs=item.durS||300;
 
+  // Bouton Valider ✓ sur le cardio
+  const skipBtn=cardEl.querySelector('.cc-skip');
+  if(skipBtn) skipBtn._validate=()=>{
+    stopTimer();
+    chkEl.classList.add('on'); chkEl.textContent='✓';
+    cardEl.classList.add('dk2'); coachEl.classList.remove('on');
+    if(!doneSet.has('ell-'+item.nom)){ doneSet.add('ell-'+item.nom); updateProg(); allDone(); }
+  };
+
   countdown321(item.nom,()=>{
     coachEl.classList.add('on');
     speak('C\'est parti ! Force '+(steps?steps[0].f:'au programme'));
     let stepIdx=0, elapsed=0;
-    // highlight first step
     highlightStep(cardEl,0);
-    $(labelId).textContent='Elliptique · Force '+(steps?steps[0].f:'?')+'/15';
+    $(labelId).textContent='Elliptique · F'+(steps?steps[0].f:'?')+'/15'+(steps&&steps[0].rpm?' · '+steps[0].rpm:'');
     setRing(ringId,100); updTimerEl(timeId,totalSecs); tTot=totalSecs; tSec=totalSecs;
-
     tInt=setInterval(()=>{
       tSec--; elapsed++;
       updTimerEl(timeId,tSec);
       setRing(ringId,Math.round(tSec/tTot*100));
-      // check step change
       if(steps){
         let acc=0;
         for(let i=0;i<steps.length;i++){
@@ -667,11 +592,9 @@ function startElliptiqueTimer(item,cardEl,chkEl){
           if(elapsed<acc){
             if(i!==stepIdx){
               stepIdx=i;
-              const f=steps[stepIdx].f;
-              const lbl=steps[stepIdx].label;
-              speak('Passe à force '+f+(lbl?' — '+lbl:''));
-              vib();
-              $(labelId).textContent='Elliptique · Force '+f+'/15'+(lbl?' · '+lbl:'');
+              const f=steps[stepIdx].f, lbl=steps[stepIdx].label, rpm=steps[stepIdx].rpm||'';
+              speak('Passe à force '+f+(lbl?' — '+lbl:'')); vib();
+              $(labelId).textContent='Elliptique · F'+f+'/15'+(rpm?' · '+rpm:'');
               highlightStep(cardEl,stepIdx);
             }
             break;
@@ -686,48 +609,39 @@ function startElliptiqueTimer(item,cardEl,chkEl){
         speak('Cardio terminé. Bien joué !'); vib();
         chkEl.classList.add('on'); chkEl.textContent='✓';
         cardEl.classList.add('dk2'); coachEl.classList.remove('on');
-        doneSet.add('ell-'+item.nom);
-        updateProg(); allDone();
+        doneSet.add('ell-'+item.nom); updateProg(); allDone();
       }
     },1000);
   });
 }
 
 function highlightStep(cardEl,idx){
-  cardEl.querySelectorAll('.estep').forEach((el,i)=>{
-    el.className='estep'+(i===idx?' cur':'');
-  });
+  cardEl.querySelectorAll('.estep').forEach((el,i)=>{ el.className='estep'+(i===idx?' cur':''); });
 }
-
 function stopTimer(){
   if(tInt){ clearInterval(tInt); tInt=null; }
   document.querySelectorAll('.ex-coach.on').forEach(el=>el.classList.remove('on'));
 }
 function vib(){try{navigator.vibrate&&navigator.vibrate([80,40,80])}catch{}}
 
-// ── MUSCU: bouton "Valider" manuel ──
-// Flux: tap check → countdown 3-2-1 → affiche "Série 1/4 — Valider quand tu as fini"
-//       tap Valider → repos 40s → countdown → Série 2/4... → fin → coche l'exercice
+// ── MUSCU: validation manuelle ──
+// FIX double countdown : après le repos, on appelle showSerie() DIRECTEMENT,
+// sans nouveau countdown321. Un seul 3-2-1 par exercice (au tap initial).
 function startExManual(id,item){
   const chk=$('chk-'+id);
   if(chk.classList.contains('on')){
-    chk.classList.remove('on');
-    chk.innerHTML=`<span>${parseInt(id.slice(1))+1}</span>`;
+    chk.classList.remove('on'); chk.innerHTML=`<span>${parseInt(id.slice(1))+1}</span>`;
     $('card-'+id).classList.remove('dk2');
-    const coach=$('coach-'+id);
-    if(coach) coach.classList.remove('on');
-    const vb=$('val-'+id); if(vb){ vb.style.display='none'; vb._onValidate=null; }
-    doneSet.delete(id); stopTimer(); updateProg(); allDone();
-    return;
+    $('coach-'+id)?.classList.remove('on');
+    const br=$('btnrow-'+id); if(br) br.className='btn-row';
+    doneSet.delete(id); stopTimer(); updateProg(); allDone(); return;
   }
-
-  const series=item.series||4;
-  const reposSecs=item.timer||40;
+  const series=item.series||4, reposSecs=item.timer||40;
   const coachEl=$('coach-'+id);
-  const ringId='ring-'+id;
-  const labelId='clabel-'+id;
-  const timeId='ctime-'+id;
-  const valBtn=$('val-'+id);
+  const ringId='ring-'+id, labelId='clabel-'+id, timeId='ctime-'+id;
+  const btnRow=$('btnrow-'+id);
+  const valSerieBtn=$('valserie-'+id);
+  const valExBtn=$('valex-'+id);
   let currentSerie=1;
 
   function finishEx(){
@@ -735,29 +649,36 @@ function startExManual(id,item){
     chk.classList.add('on'); chk.textContent='✓';
     $('card-'+id).classList.add('dk2');
     coachEl.classList.remove('on');
-    hideValBtn();
+    if(btnRow) btnRow.className='btn-row';
     doneSet.add(id); stopTimer(); updateProg(); allDone();
   }
 
+  // Valider l'exercice entier directement (peu importe la série en cours)
+  function forceFinishEx(){
+    stopTimer(); finishEx();
+  }
+
   function showSerie(){
-    stopTimer();
-    coachEl.classList.add('on');
+    stopTimer(); coachEl.classList.add('on');
     const isGainage=!!item.ig;
     const label=isGainage
-      ? `⏱ Gainage ${currentSerie}/${series} · ${item.reps}`
-      : `💪 Série ${currentSerie}/${series} · ${item.reps} reps`;
+      ?`⏱ Gainage ${currentSerie}/${series} · ${item.reps}`
+      :`💪 Série ${currentSerie}/${series} · ${item.reps} reps`;
     $(labelId).textContent=label;
     setRing(ringId,0);
-    $(timeId).textContent='';
-    $(timeId).className='ex-coach-time';
+    const te=$(timeId); if(te){ te.textContent=''; te.className='ex-coach-time'; }
     speak(isGainage?`Gainage, série ${currentSerie} sur ${series}`:`Série ${currentSerie} sur ${series}. À toi !`);
 
-    const btnLabel=currentSerie<series?`Valider série ${currentSerie} →`:'Terminer l\'exercice ✓';
-    showValBtn(btnLabel, ()=>afterValidate());
+    // Mettre à jour boutons
+    if(btnRow) btnRow.className='btn-row on';
+    if(valSerieBtn){
+      valSerieBtn.textContent=currentSerie<series?`Valider série ${currentSerie} →`:'Terminer ✓';
+      valSerieBtn._cb=()=>afterValidate();
+    }
+    if(valExBtn) valExBtn._cb=()=>forceFinishEx();
 
     if(isGainage){
       const gSecs=parseInt(String(item.reps))||45;
-      coachEl.classList.add('on');
       setRing(ringId,100); tTot=gSecs; tSec=gSecs;
       updTimerEl(timeId,tSec);
       tInt=setInterval(()=>{
@@ -774,40 +695,16 @@ function startExManual(id,item){
   function afterValidate(){
     stopTimer();
     if(currentSerie<series){
-      // Start repos, then show next serie (no double countdown for gainage)
-      startRepos(reposSecs,ringId,labelId,timeId,coachEl,()=>{
-        currentSerie++;
-        // Only do countdown for non-gainage, since gainage auto-starts timer
-        if(item.ig){
-          showSerie();
-        } else {
-          countdown321(`Série ${currentSerie} sur ${series}`,showSerie);
-        }
-      });
+      currentSerie++;
+      // Repos PUIS showSerie directement — PAS de nouveau countdown
+      startRepos(reposSecs,ringId,labelId,timeId,coachEl,()=>showSerie());
     } else {
       finishEx();
     }
   }
 
-  function showValBtn(label, cb){
-    if(!valBtn) return;
-    valBtn.style.display='block';
-    valBtn.textContent=label;
-    valBtn._onValidate=cb;
-  }
-  function hideValBtn(){
-    if(!valBtn) return;
-    valBtn.style.display='none';
-    valBtn._onValidate=null;
-  }
-
-  // Start: countdown then show serie 1
-  if(item.ig){
-    // Gainage: single countdown then timer starts immediately
-    countdown321(`Gainage · série 1 sur ${series}`,showSerie);
-  } else {
-    countdown321(`Série 1 sur ${series}`,showSerie);
-  }
+  // Premier lancement : 3-2-1 puis série 1
+  countdown321(`Série 1 sur ${series}`,showSerie);
 }
 
 // ── BUILD CARDS ──
@@ -836,7 +733,10 @@ function mkEx(item,idx){
         <div class="ex-coach-label" id="clabel-${id}">—</div>
       </div>
     </div>
-    <button class="val-btn" id="val-${id}" style="display:none">Valider →</button>
+    <div class="btn-row" id="btnrow-${id}">
+      <button class="val-serie" id="valserie-${id}">Valider série →</button>
+      <button class="val-ex" id="valex-${id}">✓ Exercice fait</button>
+    </div>
     <div class="eex" id="exp-${id}">
       ${vidPanel(item.vk||'elliptique')}
       <div class="egrid">
@@ -849,12 +749,15 @@ function mkEx(item,idx){
     </div>`;
   el.querySelector('#chk-'+id).addEventListener('click',e=>{e.stopPropagation();startExManual(id,item)});
   el.querySelector('#main-'+id).addEventListener('click',()=>expand(id));
-  // val-btn: listener uses a mutable callback ref so startExManual can update it
-  const valBtn=el.querySelector('#val-'+id);
-  valBtn._onValidate=null;
-  valBtn.addEventListener('click',e=>{
+  el.querySelector('#valserie-'+id).addEventListener('click',e=>{
     e.stopPropagation();
-    if(valBtn._onValidate) valBtn._onValidate();
+    const btn=el.querySelector('#valserie-'+id);
+    if(btn._cb) btn._cb();
+  });
+  el.querySelector('#valex-'+id).addEventListener('click',e=>{
+    e.stopPropagation();
+    const btn=el.querySelector('#valex-'+id);
+    if(btn._cb) btn._cb();
   });
   return el;
 }
@@ -863,7 +766,7 @@ function mkCardio(item,idx){
   const id='x'+idx;
   const el=document.createElement('div');
   el.className='cc'; el.id='card-'+id;
-  const sHTML=item.steps?stepsHTML(ELLIPSTEPS[item.steps]).replace(/CARDID/g,id):'';
+  const sHTML=item.steps?stepsHTML(ELLIPSTEPS[item.steps],id):'';
   el.innerHTML=`
     <div class="cm">
       <span class="cn">${item.nom}</span>
@@ -880,34 +783,33 @@ function mkCardio(item,idx){
       <div class="ex-coach-info">
         <div class="ex-coach-label" id="clabel-${id}">—</div>
       </div>
-      <button class="ex-coach-skip" id="cskip-${id}" style="background:rgba(232,0,26,0.15);border:1px solid var(--red);border-radius:8px;padding:8px 12px;font-family:var(--fc);font-size:11px;font-weight:600;color:var(--red);cursor:pointer;flex-shrink:0;min-height:44px;-webkit-tap-highlight-color:transparent">Valider ✓</button>
+      <button class="cc-skip" id="cskip-${id}" style="background:rgba(232,0,26,0.15);border:1px solid var(--red);border-radius:8px;padding:8px 12px;font-family:var(--fc);font-size:11px;font-weight:600;color:var(--red);cursor:pointer;flex-shrink:0;min-height:44px;-webkit-tap-highlight-color:transparent">Valider ✓</button>
     </div>
     ${sHTML}`;
   const chk=el.querySelector('#chk-'+id);
   chk.addEventListener('click',()=>startElliptiqueTimer(item,el,chk));
-  // "Valider ✓" = marque le cardio comme terminé sans attendre la fin du timer
   el.querySelector('#cskip-'+id).addEventListener('click',e=>{
     e.stopPropagation();
-    stopTimer();
-    chk.classList.add('on'); chk.textContent='✓';
-    el.classList.add('dk2');
-    el.querySelector('#coach-'+id).classList.remove('on');
-    if(!doneSet.has('ell-'+item.nom)){
-      doneSet.add('ell-'+item.nom);
-      updateProg(); allDone();
+    const btn=el.querySelector('#cskip-'+id);
+    if(btn._validate) btn._validate();
+    else{
+      // fallback si timer pas encore démarré
+      stopTimer();
+      chk.classList.add('on'); chk.textContent='✓';
+      el.classList.add('dk2');
+      el.querySelector('#coach-'+id)?.classList.remove('on');
+      if(!doneSet.has('ell-'+item.nom)){ doneSet.add('ell-'+item.nom); updateProg(); allDone(); }
     }
   });
   return el;
 }
 
 function expand(id){
-  const card=$('card-'+id);
-  card.classList.toggle('exp');
+  const card=$('card-'+id); card.classList.toggle('exp');
   const arrow=card.querySelector('.ea');
   if(arrow) arrow.textContent=card.classList.contains('exp')?'⌄':'›';
 }
 
-// ── SÉANCE ──
 function openSeance(key,label){
   curDay=key; doneSet=new Set(); stopTimer();
   const p=P[key];
@@ -936,7 +838,6 @@ function updateProg(){
   $('progPct').textContent=p+'%'; $('progFill').style.width=p+'%';
 }
 
-// ── HOME ──
 function buildHome(){
   $('statKcal').textContent=weekKcal(); $('statDone').textContent=weekSess();
   const list=$('dayList'); list.innerHTML='';
@@ -957,7 +858,6 @@ function buildHome(){
   });
 }
 
-// ── RECAP ──
 function showRecap(){
   const p=P[curDay];
   const lbl=JOURS.find(j=>j.key===curDay)?.label||'';
@@ -1020,7 +920,7 @@ function toggleNotif(){
   if(!notifOn){
     if('Notification' in window) Notification.requestPermission().then(p=>{if(p==='granted'){notifOn=true;updNotif();}else $('notifSub').textContent='Permission refusée';});
     else{notifOn=true;updNotif();}
-  } else{notifOn=false;updNotif();}
+  }else{notifOn=false;updNotif();}
 }
 function updNotif(){
   $('notifToggle').classList.toggle('on',notifOn);
