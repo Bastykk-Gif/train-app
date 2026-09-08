@@ -176,9 +176,18 @@
 <script>
 let allEntries = [];
 let allMensurations = [];
-let refTargets = {};
+let targetHistory = [];
 let filtered = [];
 let charts = {};
+
+// Renvoie l'objectif en vigueur à une date donnée, selon l'historique target_history (trié par from_date croissant)
+function targetForDate(dateStr){
+  let t = targetHistory[0];
+  for (const period of targetHistory){
+    if (period.from_date <= dateStr) t = period; else break;
+  }
+  return t;
+}
 
 if (typeof Chart === 'undefined') {
   document.getElementById('subtitle').textContent = 'Erreur : la librairie de graphiques (Chart.js) n\'a pas pu se charger. Vérifie ta connexion et recharge la page.';
@@ -192,11 +201,12 @@ fetch('data.json?t=' + Date.now(), {cache:'no-store'})
     return r.json();
   })
   .then(data => {
-    refTargets = data.reference_targets;
+    targetHistory = [...data.target_history].sort((a,b) => a.from_date.localeCompare(b.from_date));
     allEntries = data.entries.filter(e => e.poids !== null || e.kcal !== null);
     allMensurations = data.mensurations || [];
+    const current = targetHistory[targetHistory.length - 1];
     document.getElementById('subtitle').textContent =
-      `${allEntries.length} jours enregistrés · Objectif référence : ${refTargets.kcal} kcal / ${refTargets.proteines_g}P / ${refTargets.lipides_g}L / ${refTargets.glucides_g}G`;
+      `${allEntries.length} jours enregistrés · Objectif actuel (depuis ${fmtDate(current.from_date)}) : ${current.kcal} kcal / ${current.proteines_g}P / ${current.lipides_g}L / ${current.glucides_g}G`;
     applyPreset('all');
     renderMensurations();
   })
@@ -255,28 +265,30 @@ function render(){
 
   // Kcal
   const kcalData = filtered.map(e => e.kcal);
+  const kcalTargetData = filtered.map(e => targetForDate(e.date).kcal);
+  const currentTarget = targetForDate(filtered[filtered.length-1].date);
   setStats('kcalStats', [
     ['Moyenne', avg(kcalData) ? Math.round(avg(kcalData))+' kcal' : '—'],
-    ['Cible', refTargets.kcal+' kcal'],
+    ['Cible actuelle', currentTarget.kcal+' kcal (depuis '+fmtDate(currentTarget.from_date)+')'],
   ]);
   makeChart('chartKcal', 'bar', labels, [
     {label:'Kcal consommées', data:kcalData, backgroundColor:'#818cf8'},
-    {label:'Cible', data:filtered.map(()=>refTargets.kcal), type:'line', borderColor:'#f59e0b', borderDash:[5,5], pointRadius:0}
+    {label:'Cible', data:kcalTargetData, type:'line', borderColor:'#f59e0b', borderDash:[5,5], pointRadius:0, stepped:true}
   ], {y:{min:1000}});
 
   // Macros
   setStats('macroStats', [
-    ['Glucides moy.', avg(filtered.map(e=>e.glucides)) ? Math.round(avg(filtered.map(e=>e.glucides)))+'g / '+refTargets.glucides_g+'g' : '—'],
-    ['Protéines moy.', avg(filtered.map(e=>e.proteines)) ? Math.round(avg(filtered.map(e=>e.proteines)))+'g / '+refTargets.proteines_g+'g' : '—'],
-    ['Lipides moy.', avg(filtered.map(e=>e.lipides)) ? Math.round(avg(filtered.map(e=>e.lipides)))+'g / '+refTargets.lipides_g+'g' : '—'],
+    ['Glucides moy.', avg(filtered.map(e=>e.glucides)) ? Math.round(avg(filtered.map(e=>e.glucides)))+'g / '+currentTarget.glucides_g+'g (cible actuelle)' : '—'],
+    ['Protéines moy.', avg(filtered.map(e=>e.proteines)) ? Math.round(avg(filtered.map(e=>e.proteines)))+'g / '+currentTarget.proteines_g+'g (cible actuelle)' : '—'],
+    ['Lipides moy.', avg(filtered.map(e=>e.lipides)) ? Math.round(avg(filtered.map(e=>e.lipides)))+'g / '+currentTarget.lipides_g+'g (cible actuelle)' : '—'],
   ]);
   makeChart('chartMacros', 'line', labels, [
     {label:'Glucides', data:filtered.map(e=>e.glucides), borderColor:'#f59e0b', spanGaps:true, tension:.3},
-    {label:'Objectif Glucides', data:filtered.map(()=>refTargets.glucides_g), borderColor:'#f59e0b', borderDash:[4,4], pointRadius:0, borderWidth:1},
+    {label:'Objectif Glucides', data:filtered.map(e=>targetForDate(e.date).glucides_g), borderColor:'#f59e0b', borderDash:[4,4], pointRadius:0, borderWidth:1, stepped:true},
     {label:'Protéines', data:filtered.map(e=>e.proteines), borderColor:'#4ade80', spanGaps:true, tension:.3},
-    {label:'Objectif Protéines', data:filtered.map(()=>refTargets.proteines_g), borderColor:'#4ade80', borderDash:[4,4], pointRadius:0, borderWidth:1},
+    {label:'Objectif Protéines', data:filtered.map(e=>targetForDate(e.date).proteines_g), borderColor:'#4ade80', borderDash:[4,4], pointRadius:0, borderWidth:1, stepped:true},
     {label:'Lipides', data:filtered.map(e=>e.lipides), borderColor:'#f87171', spanGaps:true, tension:.3},
-    {label:'Objectif Lipides', data:filtered.map(()=>refTargets.lipides_g), borderColor:'#f87171', borderDash:[4,4], pointRadius:0, borderWidth:1},
+    {label:'Objectif Lipides', data:filtered.map(e=>targetForDate(e.date).lipides_g), borderColor:'#f87171', borderDash:[4,4], pointRadius:0, borderWidth:1, stepped:true},
   ]);
 
   // Sport
