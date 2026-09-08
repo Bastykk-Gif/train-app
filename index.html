@@ -1276,7 +1276,7 @@ function navTo(s){
   if(s==='home') buildHome();
   if(s==='suivi'){
     const f=$('suiviFrame');
-    if(!suiviLoaded){ f.src='dashboard.html'; suiviLoaded=true; }
+    if(!suiviLoaded){ f.src='dashboard.html?t='+Date.now(); suiviLoaded=true; }
   }
 }
 function goHome(){stopTimer();navTo('home')}
